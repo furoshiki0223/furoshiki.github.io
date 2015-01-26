@@ -37,6 +37,9 @@ setDefaultCSS = () ->
 			width : 100%;
 			height: 100%;
 		}
+		html {
+			touch-action : none;
+		}
 		section {
 			display : none;
 			position : fixed;
