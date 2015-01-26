@@ -1,5 +1,5 @@
 (function() {
-  var PAGE_DELAY, after, before, convertParams, delayInit, fadeOut, frameCount, getSpeedElement, goBackToLastSection, gotoNextSection, gotoTargetId, init, isMobile, isWorking, maxPageCount, moveFrame, moveProgressView, nextFrame, pageCount, pageFrameCount, sections, setCSS, setDefaultCSS, showFirstSection, showLoadView, speedElems, switchVideoState;
+  var PAGE_DELAY, after, before, convertParams, delayInit, fadeOut, frameCount, getSpeedElement, goBackToLastSection, gotoNextSection, gotoTargetId, init, isMobile, isWorking, maxPageCount, moveFrame, moveProgressView, nextFrame, pageCount, pageFrameCount, popEvent, sections, setCSS, setDefaultCSS, showFirstSection, showLoadView, spaPush, speedElems, switchPage, switchVideoState;
 
   PAGE_DELAY = 60;
 
@@ -8,6 +8,26 @@
   };
 
   isMobile = (navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf('iPad') === -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0;
+
+  isWorking = false;
+
+  spaPush = false;
+
+  frameCount = 0;
+
+  pageFrameCount = 0;
+
+  speedElems = [];
+
+  sections = [];
+
+  pageCount = 0;
+
+  maxPageCount = 0;
+
+  after = null;
+
+  before = null;
 
   window.LEAPING = {
     actions: {},
@@ -122,14 +142,6 @@
     }
   };
 
-  frameCount = 0;
-
-  pageFrameCount = 0;
-
-  speedElems = [];
-
-  isWorking = false;
-
   moveFrame = function() {
     var action, count, currentFrame, elem, maxTime, _i, _len;
     frameCount++;
@@ -175,16 +187,6 @@
     nextFrame(moveFrame);
   };
 
-  sections = [];
-
-  pageCount = 0;
-
-  maxPageCount = 0;
-
-  after = null;
-
-  before = null;
-
   getSpeedElement = function(elem) {
     var d, elems, list, speed, _i, _len;
     list = [];
@@ -228,9 +230,15 @@
     after.style.display = "block";
     moveFrame();
     switchVideoState();
+    if (spaPush && afterId) {
+      history.pushState({
+        id: afterId
+      }, null, "#" + afterId);
+    }
   };
 
   gotoNextSection = function() {
+    var afterId;
     if (isWorking) {
       return;
     }
@@ -243,6 +251,7 @@
     after = sections[pageCount];
     speedElems = getSpeedElement(after);
     switchVideoState();
+    afterId = after.getAttribute("id");
   };
 
   goBackToLastSection = function() {
@@ -261,14 +270,24 @@
   };
 
   gotoTargetId = function() {
-    var lst;
+    var afterId, lst;
     if (isWorking) {
       return;
     }
-    pageFrameCount = 0;
     lst = (this.getAttribute("lp-touch")).split(":");
+    afterId = lst[1];
+    switchPage(afterId);
+    if (spaPush) {
+      history.pushState({
+        id: afterId
+      }, null, "#" + afterId);
+    }
+  };
+
+  switchPage = function(afterId) {
     before = after;
-    after = document.querySelector("#" + lst[1]);
+    after = document.querySelector("#" + afterId);
+    pageFrameCount = 0;
     speedElems = getSpeedElement(after);
     switchVideoState();
   };
@@ -281,13 +300,25 @@
     }
   };
 
-  init = function() {
-    setDefaultCSS();
-  };
-
   delayInit = function() {
+    if (document.querySelector("body").getAttribute("lp-push") && window.history.pushState) {
+      spaPush = true;
+      window.addEventListener('popstate', popEvent);
+    }
     showLoadView();
     moveProgressView();
+  };
+
+  popEvent = function(evt) {
+    var state;
+    state = evt.state;
+    if (state.id) {
+      switchPage(state.id);
+    }
+  };
+
+  init = function() {
+    setDefaultCSS();
   };
 
   init();
