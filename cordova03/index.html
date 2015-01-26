@@ -2,6 +2,8 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+
+<!-- icon -->
 <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-touch-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="114x114" href="ico/apple-touch-icon-114x114.png">
 <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-touch-icon-72x72.png">
@@ -18,75 +20,657 @@
 <link rel="icon" type="image/png" href="ico/favicon-32x32.png" sizes="32x32">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="msapplication-TileImage" content="ico/mstile-144x144.png">
-<title>デスクトップ向けのHTML5ハイブリッドアプリが地味に辛かったという話</title>
+<script src="js/leaping-min.js"></script>
+<script src="js/leaping-slidein.js"></script>
+<script src="js/leaping-fade.js"></script>
+<title>HTML5を使ってマルチOS対応なデスクトップアプリを作る3つの方法</title>
+
+<style>
+@font-face {
+  font-family: 'normal';
+  src: url("font/TanukiMagic.woff") format("woff"),url("font/TanukiMagic.ttf") format("truetype");
+  /* src: url("font/rounded-mplus-1c-light.ttf") format("truetype"); */
+}
+html {
+	font-family: 'normal', meiryo, sans-serif;
+ 	font-size: 240%;
+}
+a {
+	color : rgb(200,200,255);
+	text-decoration : none;
+}
+a:hover {
+	text-decoration : underline;
+}
+ul {
+	width : 70%;
+	text-align :left;
+	margin : 0 auto;
+}
+li {
+	margin-bottom : 20px;
+}
+.button { 
+	position : fixed;
+	top : 90%;
+	left : 0%;
+	width: 100%;
+}
+.button>.back {
+	position : absolute;
+	width : 50%;
+	text-align : left;
+	cursor : pointer;
+}
+.button>.next {
+	position : absolute;
+	width : 50%;
+	right : 0%;
+	text-align : right;
+	cursor : pointer;	
+}
+</style>
+
 </head>
 <body>
 
-<section>
-	<h1>デスクトップ向けのHTML5ハイブリッドアプリが<br/>地味に辛かったという話</h1>
-	<p>第三回Apache Cordova勉強会</p>
-	<p>2015年1月26日</p>
+<section lp-bg="img/01.jpg" style="color:black;text-shadow:0px 0px 10px white;" lp-touch="next">
+	<div lp-y="10">
+		<h1>HTML5を使って<br/>マルチOS対応なデスクトップアプリを作る<br/>3つの方法</h1>
+		<p>第三回Apache Cordova勉強会</p>
+		<p>2015年1月26日</p>
+	<div>
 </section>
 
-<section>
+
+
+<section lp-action="slide-in" style="background-color:black;" lp-touch="next">
+	<h2 lp-speed="10">川田 寛</h2>
+	<ul>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
 	<h2>川田 寛</h2>
 	<ul>
 		<li>エンジニア＠最近はモバイルWeb</li>
-		<li> Twitter : <a href="https://twiwtter.com/kawada_hiroshi">kawada_hiroshi</a></li>
-		<li> 本日のスライド : <a href="https://furoshiki.github.io/cordova03">hiroshik850223.github.io/cordova03</a></li>
 	</ul>
 </section>
-
-<section>
-	<h2>Windowsネイティブは割と面白いのだけど</h2>
+<section lp-action="nope" lp-touch="next">
+	<h2>川田 寛</h2>
 	<ul>
-		<li>ネイティブでやるほどパフォーマンスを求めていない。</li>
-		<li>Winネイティブ縛りってのをやめたい。</li>
-		<li>スクリーンサイズを縛るのをやめたい。</li>
+		<li>エンジニア＠最近はモバイルWeb</li>
+		<li>日本Cordovaユーザー会の発起人＠働かない</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>川田 寛</h2>
+	<ul>
+		<li>エンジニア＠最近はモバイルWeb</li>
+		<li>日本Cordovaユーザー会の発起人＠働かない</li>
+		<li>Twitter : <a href="https://twitter.com/kawada_hiroshi">twitter.com/kawada_hiroshi</a></li>
 	</ul>
 </section>
 
-<section>
-	<h2>HTML5ハイブリッドアプリ<br/>あえて、デスクトップ向けに使ってやろう</h2>
+
+
+<section lp-action="nope" lp-touch="next">
+	<h2 lp-y="45" lp-speed="10">ところで</h2>
 </section>
 
-<section>
-	<h2>そんなことできるの？</h2>
+<section lp-touch="next">
+	<h2>Windowsネイティブは<br/>割と面白いのだけど…</h2>
+	<ul>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>Windowsネイティブは<br/>割と面白いのだけど…</h2>
+	<ul>
+		<li>Winネイティブでやるほどパフォーマンスを求めていない時！</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>Windowsネイティブは<br/>割と面白いのだけど…</h2>
+	<ul>
+		<li>Winネイティブでやるほどパフォーマンスを求めていない時！</li>
+		<li>そもそも、Winネイティブ縛りってのをやめたい時！</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>Windowsネイティブは<br/>割と面白いのだけど…</h2>
+	<ul>
+		<li>Winネイティブでやるほどパフォーマンスを求めていない時！</li>
+		<li>そもそも、Winネイティブ縛りってのをやめたい時！</li>
+		<li>そもそも、スクリーンサイズを縛るのをやめたい時！</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>Windowsネイティブは<br/>割と面白いのだけど…</h2>
+	<ul>
+		<li style="font-size:200%;" lp-speed="10">C#よりもJSでやりたいという、困ったテンションの時！</li>
+	</ul>
 </section>
 
-<section>
+
+
+
+<section lp-touch="next">
+	<h2 lp-y="10">
+		<p lp-speed="20">HTML5ハイブリッドアプリ</p>
+		<p lp-speed="20">あ・え・て</p>
+		<p lp-speed="20">デスクトップ向けに使ってやろう!</p>
+	</h2>
+</section>
+
+<section lp-action="nope" lp-touch="next">
+	<h2 lp-y="40">そんなことできるの？</h2>
+</section>
+
+<section lp-touch="next">
 	<h2>実は結構、手段はある</h2>
 	<ul>
-		<li>Apache Cordova Desktop</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>実は結構、手段はある</h2>
+	<ul>
 		<li>Mozilla XULRunner</li>
-		<li>Node Webkit</li>
 	</ul>
 </section>
-
-<section>
-	<h2>Cordova Desktop</h2>
+<section lp-action="nope" lp-touch="next">
+	<h2>実は結構、手段はある</h2>
 	<ul>
-		<li>Apache Cordova Desktop</li>
 		<li>Mozilla XULRunner</li>
-		<li>Node Webkit</li>
+		<li>Apache Cordova</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>実は結構、手段はある</h2>
+	<ul>
+		<li>Mozilla XULRunner</li>
+		<li>Apache Cordova</li>
+		<li>Node-Webkit</li>
 	</ul>
 </section>
 
-<section>
-	<h2>どうすればよかったのか？</h2>
+
+<!-- XULRunner ---------------------------------------------------- -->
+
+
+<section lp-bg="img/05.jpg" style="color:black;text-shadow:0px 0px 10px white;" lp-touch="next">
+	<h2 lp-y="40" style="background-color:rgba(255,255,255,0.5);padding:10px;">XULRunner</h2>
+</section>
+
+<section lp-touch="next">
+	<h2>What is XULRunner?</h2>
 	<ul>
-		<li>デスクトップはNode Webkitでいいと思う</li>
-		<li>モバイルはCordova or Crosswalkでいいと思う
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is XULRunner?</h2>
+	<ul>
+		<li>3つの中で一番シンプルかつ古株</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is XULRunner?</h2>
+	<ul>
+		<li>3つの中で一番シンプルかつ古株</li>
+		<li>エンジン：Gecko</li>
 	</ul>
 </section>
 
-<section>
-	<h2>やってみてよかったと思うこと</h2>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is XULRunner?</h2>
 	<ul>
-		<li></li>
-		<li></li>
 	</ul>
 </section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is XULRunner?</h2>
+	<ul>
+		<li>GeckoはHTML5だけじゃなくてXULというマークアップ言語を動かせる。</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is XULRunner?</h2>
+	<ul>
+		<li>GeckoはHTML5だけじゃなくてXULというマークアップ言語を動かせる。</li>
+		<li>セガ版Xamarinだと思えばいい。</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is XULRunner?</h2>
+	<ul>
+		<li>GeckoはHTML5だけじゃなくてXULというマークアップ言語を動かせる。</li>
+		<li>セガ版Xamarinだと思えばいい。</li>
+		<li>＼(^o^)／な感じが半端ない。</li>
+	</ul>
+</section>
+
+
+<section lp-touch="next">
+	<h2>使いたいって言ったら<br/>Mozillaの浅◯さんが…</h2>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>使いたいって言ったら<br/>Mozillaの浅◯さんが…</h2>
+	<p><img src="img/dynamis.png">浅◯「FirefoxのUIも全部HTML5ににしようとか言い出しているこの時期に、XULとか何を言ってるの？」</p>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>使いたいって言ったら<br/>Mozillaの浅◯さんが…</h2>
+	<p><img src="img/dynamis.png">浅◯「FirefoxのUIも全部HTML5ににしようとか言い出しているこの時期に、XULとか何を言ってるの？」</p>
+	<p><img src="img/self.jpg">川田「す、す、すみませんでしたっ！！」</p>
+</section>
+
+
+
+<section lp-touch="next">
+	<h2>名前こそXULRunnerだけど…<br/>中身はGeckoなのでHTML5が使える!?</h2>
+	<ul>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>名前こそXULRunnerだけど…<br/>中身はGeckoなのでHTML5が使える!?</h2>
+	<ul>
+		<li>HTML5Runnerみたいな感じで使える。まさにコ◯ミコマンド！</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>名前こそXULRunnerだけど…<br/>中身はGeckoなのでHTML5が使える!?</h2>
+	<ul>
+		<li>HTML5Runnerみたいな感じで使える。まさにコ◯ミコマンド！</li>
+		<li>使い方は簡単。</il>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>名前こそXULRunnerだけど…<br/>中身はGeckoなのでHTML5が使える!?</h2>
+	<ul>
+		<li>HTML5Runnerみたいな感じで使える。まさにコ◯ミコマンド！</li>
+		<li>使い方は簡単。</il>
+		<li>アセット(HTML/JS/CSS)を指定のフォルダに入れるだけ。ツールとか無し</li>
+	</ul>
+</section>
+
+<section lp-touch="next">
+	<h2 lp-y="30">こうやって使います</h2>
+	<p lp-y="50"><a target="_blank" href="http://furoshiki.hatenadiary.jp/entry/2013/09/18/170757">http://furoshiki.hatenadiary.jp/entry/2013/09/18/170757</a></p>
+	<pre lp-y="75" lp-x="10" lp-speed="40" style="padding:10px;border:1px solid gray;width:80%;text-align:left;font-size:70%;">
+ > xulrunner application.ini</pre>
+
+</section>
+
+<section lp-touch="next">
+	<h2>XULRunnerぶっちゃけいいの？</h2>
+	<ul>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>XULRunnerぶっちゃけいいの？</h2>
+	<ul>
+		<li>正直つらいです。</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>XULRunnerぶっちゃけいいの？</h2>
+	<ul>
+		<li>正直つらいです。</li>
+		<li>Mac向けのインストール手順がやや煩雑。</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>XULRunnerぶっちゃけいいの？</h2>
+	<ul>
+		<li>正直つらいです。</li>
+		<li>Mac向けのインストール手順がやや煩雑。</li>
+		<li>FirefoxOSを彷彿とさせる似非マルチプラットフォーム感が！！</li>
+	</ul>
+</section>
+
+
+<section lp-touch="next">
+	<p>ex. WebStorage使うのにも、<br/>Gecko独自機能を呼び出さないといけない!!</p>
+	<pre lp-speed="40" style="padding:10px;border:1px solid gray;width:80%;margin:0 auto;text-align:left;font-size:70%;">
+var url = "http://sample.com/";
+var ios = Components.classes["@mozilla.org/network/io-service;1"]
+      .getService(Components.interfaces.nsIIOService);
+var ssm = Components.classes["@mozilla.org/scriptsecuritymanager;1"]
+      .getService(Components.interfaces.nsIScriptSecurityManager);
+var dsm = Components.classes["@mozilla.org/dom/storagemanager;1"]
+      .getService(Components.interfaces.nsIDOMStorageManager);
+var uri = ios.newURI(url, "", null);
+var principal = ssm.getCodebasePrincipal(uri);
+
+var myLocalStorage = dsm.getLocalStorageForPrincipal(principal, "");</pre>
+</section>
+
+
+<!-- Cordova ---------------------------------------------------- -->
+
+<section lp-bg="img/07.jpg" lp-touch="next">
+	<h2 lp-y="40" style="background-color:rgba(255,255,255,0.9);padding:10px;color:black;">Cordova</h2>
+</section>
+
+<section lp-touch="next">
+	<h2>What is Cordova?</h2>
+	<ul>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is Cordova?</h2>
+	<ul>
+		<li>3つの中で一番エコシステムが発達</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is Cordova?</h2>
+	<ul>
+		<li>3つの中で一番エコシステムが発達</li>
+		<li>エンジン：Trident(Win)</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is Cordova?</h2>
+	<ul>
+		<li>3つの中で一番エコシステムが発達</li>
+		<li>エンジン：Trident(Win)</li>
+		<li>ビルドツールになっている。</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is Cordova?</h2>
+	<ul>
+		<li>3つの中で一番エコシステムが発達</li>
+		<li>エンジン：Trident(Win)</li>
+		<li>ビルドツールになっている。</li>
+		<li>プラグインで機能を足しやすい。</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is Cordova?</h2>
+	<ul>
+		<li>3つの中で一番エコシステムが発達</li>
+		<li>エンジン：Trident(Win)</li>
+		<li>ビルドツールになっている。</li>
+		<li>プラグインで機能を足しやすい。</li>
+		<li>↑ デスクトップアプリ開発でこれ必要？</li>
+	</ul>
+</section>
+
+
+<section lp-touch="next">
+	<h2 lp-y="45">少し、残念なところ</h2>
+</section>
+
+<section lp-touch="next">
+	<h2>少し、残念なところ(Win版)</h2>
+	<ul>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>少し、残念なところ(Win版)</h2>
+	<ul>
+		<li>WebViewがTridentであるという点。</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>少し、残念なところ(Win版)</h2>
+	<ul>
+		<li>WebViewがTridentであるという点。</li>
+		<li>Windows 8 -> IE10相当</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>少し、残念なところ(Win版)</h2>
+	<ul>
+		<li>WebViewがTridentであるという点。</li>
+		<li>Windows 8 -> IE10相当</li>
+		<li>Windows 8.1 -> IE11相当</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>少し、残念なところ(Win版)</h2>
+	<ul>
+		<li>WebViewがTridentであるという点。</li>
+		<li>Windows 8 -> IE10相当</li>
+		<li>Windows 8.1 -> IE11相当</li>
+		<li>Windows 10 -> IE TP? Project Spartan?</li>
+	</ul>
+</section>
+
+<section lp-action="nope" lp-touch="next">
+	<h2>Cordovaの残念なところ(Win版)</h2>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>Cordovaの残念なところ(Win版)</h2>
+	<ul>
+		<li style="font-size:200%;">もう、環境に依存するのはこりごりだ…</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>Cordovaの残念なところ(Win版)</h2>
+	<ul>
+		<li style="font-size:200%;">もう、環境に依存するのはこりごりだ…</li>
+		<li style="font-size:50%;" lp-speed="20">Windows 10のサポートライフサイクルの指針を見る限り、最新のWebViewが活用でいるとポジティブに捉えることもできる。</li>
+	</ul>
+</section>
+
+<section lp-touch="next">
+	<h2>こうやって使います (ほどんど省略</h2>
+	<pre lp-speed="40" style="padding:10px;border:1px solid gray;width:80%;margin:0 auto;text-align:left;font-size:70%;">
+    > cordova platform add windows
+    > cordova build</pre>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2 lp-y="45">なお、</h2>
+</section>
+<section lp-touch="next">
+	<h2>デバッグはだいたい同じ香りが</h2>
+	<p>▼ Cordova</p>
+	<pre lp-speed="40" style="padding:10px;border:1px solid gray;width:80%;margin:0 auto;text-align:left;font-size:70%;">
+ > build.bat --debug        
+ > build.bat --release</pre>
+	<p>▼ XULRunner</p>
+	<pre lp-speed="40" style="padding:10px;border:1px solid gray;width:80%;margin:0 auto;text-align:left;font-size:70%;">
+ > xulrunner application.ini -console        
+ > xulrunner application.ini</pre>
+</section>
+
+
+<!-- NW.js ---------------------------------------------------- -->
+
+<section lp-bg="img/06.jpg" lp-touch="next">
+	<h2 lp-y="40" style="background-color:rgba(255,255,255,0.5);padding:10px;color:black;">Node-Webkit</h2>
+</section>
+
+<section lp-touch="next">
+	<h2>名前が変わりました</h2>
+	<p>Node-Webkit<br/>↓<br/>NW.js</p>
+	<p>(※2015年1月15日より)<p>
+</section>
+
+<section lp-bg="img/06.jpg" lp-touch="next">
+	<h2 lp-y="40" style="background-color:rgba(255,255,255,0.5);padding:10px;color:black;">NW.js</h2>
+</section>
+
+
+<section lp-touch="next">
+	<h2>What is NW.js?</h2>
+	<ul>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is NW.js?</h2>
+	<ul>
+		<li>3つの中で一番の若造</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is NW.js?</h2>
+	<ul>
+		<li>3つの中で一番の若造</li>
+		<li>エンジン：Webkit</li>
+	</ul>
+</section>
+
+
+
+<section lp-action="nope" lp-touch="next">
+	<h2>What is NW.js?</h2>
+	<ul>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is NW.js?</h2>
+	<ul>
+		<li>Node.js + Web標準でデスクトップアプリを作ることができる！</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is NW.js?</h2>
+	<ul>
+		<li>Node.js + Web標準でデスクトップアプリを作ることができる！</li>
+		<li>XULRunnerとCordovaのいいとこ取り</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is NW.js?</h2>
+	<ul>
+		<li>Node.js + Web標準でデスクトップアプリを作ることができる！</li>
+		<li>XULRunnerとCordovaのいいとこ取り</li>
+		<li>XULRunnerみたいにWebViewを内包できる</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>What is NW.js?</h2>
+	<ul>
+		<li>Node.js + Web標準でデスクトップアプリを作ることができる！</li>
+		<li>XULRunnerとCordovaのいいとこ取り</li>
+		<li>XULRunnerみたいにWebViewを内包できる</li>
+		<li>Cordovaみたいにプラグインっぽいことも(Native UI API)</li>
+	</ul>
+</section>
+
+<section lp-touch="next">
+	<h2>こうやって使います</h2>
+	<p><a href="http://blog.asial.co.jp/1305">http://blog.asial.co.jp/1305</a></p>
+</section>
+
+<section lp-touch="next">
+	<h2>ただし</h2>
+	<p>エコシステムはまだっぽい感じが。</p>
+</section>
+
+
+<!-- まとめ ---------------------------------------------------- -->
+
+<section lp-touch="next">
+	<h2>どうすれば勝てるのか？</h2>
+	<ul>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>どうすれば勝てるのか？</h2>
+	<ul>
+		<li>デスクトップはNW.jsでいいと思う</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>どうすれば勝てるのか？</h2>
+	<ul>
+		<li>デスクトップはNW.jsでいいと思う</li>
+		<li>モバイルはCordova(iOS)、Crosswalk(Android)でいいと思う</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>どうすれば勝てるのか？</h2>
+	<ul>
+		<li>デスクトップはNW.jsでいいと思う</li>
+		<li>モバイルはCordova(iOS)、Crosswalk(Android)でいいと思う</li>
+		<li>Linux系は一部が、XULRunnerの独壇場</li>
+	</ul>
+</section>
+
+
+<section lp-touch="next">
+	<h2>完全なデスクトップアプリになれると<br/>思ってはいけない</h2>
+	<ul>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>完全なデスクトップアプリになれると<br/>思ってはいけない</h2>
+	<ul>
+		<li>html{overflow:hidden;}してもあまり良いことがない。</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>完全なデスクトップアプリになれると<br/>思ってはいけない</h2>
+	<ul>
+		<li>html{overflow:hidden;}してもあまり良いことがない。</li>
+		<li>ウィンドウサイズをネイティブアプリっぽく固定化できない</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>完全なデスクトップアプリになれると<br/>思ってはいけない</h2>
+	<ul>
+		<li>html{overflow:hidden;}してもあまり良いことがない。</li>
+		<li>ウィンドウサイズをネイティブアプリっぽく固定化できない</li>
+		<li>CreateWindowExっぽいものを期待してはいけない</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>完全なデスクトップアプリになれると<br/>思ってはいけない</h2>
+	<ul>
+		<li>html{overflow:hidden;}してもあまり良いことがない。</li>
+		<li>ウィンドウサイズをネイティブアプリっぽく固定化できない</li>
+		<li>CreateWindowExっぽいものを期待してはいけない</li>
+		<li>スクロールがついている時点でなんかWebっぽい</li>
+	</ul>
+</section>
+
+
+<section lp-touch="next">
+	<h2>まとめ</h2>
+	<ul>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>まとめ</h2>
+	<ul>
+		<li>Mozilla XULRunner = 似非HTML5アプリ</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>まとめ</h2>
+	<ul>
+		<li>Mozilla XULRunner = 似非HTML5アプリ</li>
+		<li>NW.js = DOM(Web標準) + Node.js</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>まとめ</h2>
+	<ul>
+		<li>Mozilla XULRunner = 似非HTML5アプリ</li>
+		<li>NW.js = DOM(Web標準) + Node.js</li>
+		<li>Apache Cordova = DOM(Web標準) + プラグイン</li>
+	</ul>
+</section>
+<section lp-action="nope" lp-touch="next">
+	<h2>まとめ</h2>
+	<ul>
+		<li>Mozilla XULRunner = 似非HTML5アプリ</li>
+		<li>NW.js = DOM(Web標準) + Node.js</li>
+		<li>Apache Cordova = DOM(Web標準) + プラグイン</li>
+		<li>デスクトップHTML5アプリ ≠ デスクトップネイティブアプリ</li>
+	</ul>
+</section>
+
+
+
+<section>
+	<div lp-y="40">
+		<h2>ご清聴、ありがとうございました</h2>
+		<div style="font-size:50%;">本日のスライド : <a href="https://furoshiki.github.io/cordova03">furoshiki.github.io/cordova03</a></div>
+	</div>
+</section>
+
 
 </body>
 </html>
