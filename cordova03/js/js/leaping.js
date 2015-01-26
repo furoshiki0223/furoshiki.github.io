@@ -1,5 +1,5 @@
 (function() {
-  var PAGE_DELAY, after, before, convertParams, delayInit, fadeOut, frameCount, getSpeedElement, goBackToLastSection, gotoNextSection, gotoTargetId, init, isMobile, maxPageCount, moveFrame, moveProgressView, nextFrame, pageCount, pageFrameCount, sections, setCSS, setDefaultCSS, showFirstSection, showLoadView, speedElems, switchVideoState;
+  var PAGE_DELAY, after, before, convertParams, delayInit, fadeOut, frameCount, getSpeedElement, goBackToLastSection, gotoNextSection, gotoTargetId, init, isMobile, isWorking, maxPageCount, moveFrame, moveProgressView, nextFrame, pageCount, pageFrameCount, sections, setCSS, setDefaultCSS, showFirstSection, showLoadView, speedElems, switchVideoState;
 
   PAGE_DELAY = 60;
 
@@ -17,7 +17,7 @@
   setDefaultCSS = function() {
     var style;
     style = document.createElement("style");
-    style.textContent = "html,body {\n	margin : 0;\n	padding : 0;\n	background-color : black;\n	color : white;\n	overflow : hidden;\n	width : 100%;\n	height: 100%;\n}\nsection {\n	display : none;\n	position : fixed;\n	top : 0%;\n	left : 0%;\n	width : 100%;\n	height : 100%;\n	background-repeat : no-repeat;\n	background-position : center center;\n	background-size : cover;\n	text-align : center;\n}\n.lpBlock {\n	position : fixed;\n	dipslay : block;\n	width : 100%;\n	left : 0%;\n	top : 0%;\n	text-align : center;\n	margin : 0;\n	padding : 0;\n}\n.nowloading {\n	display : block;\n	position : fixed;\n	top : 0%;\n	left : 0%;\n	width : 100%;\n	height : 100%;\n	background-color: black;\n}\n.nowloading>.progress {\n	position : absolute;\n	bottom : 2%;\n	right : 2%;\n	width :100%;\n	text-align : right;\n}\n.nowloading>.progress>.logo {\n	display : inline-block;\n	width : 16px;\n	height : 16px;\n}";
+    style.textContent = "html,body {\n	margin : 0;\n	padding : 0;\n	background-color : black;\n	color : white;\n	overflow : hidden;\n	width : 100%;\n	height: 100%;\n}\nhtml {\n	touch-action : none;\n}\nsection {\n	display : none;\n	position : fixed;\n	top : 0%;\n	left : 0%;\n	width : 100%;\n	height : 100%;\n	background-repeat : no-repeat;\n	background-position : center center;\n	background-size : cover;\n	text-align : center;\n}\n.lpBlock {\n	position : fixed;\n	dipslay : block;\n	width : 100%;\n	left : 0%;\n	top : 0%;\n	text-align : center;\n	margin : 0;\n	padding : 0;\n}\n.nowloading {\n	display : block;\n	position : fixed;\n	top : 0%;\n	left : 0%;\n	width : 100%;\n	height : 100%;\n	background-color: black;\n}\n.nowloading>.progress {\n	position : absolute;\n	bottom : 2%;\n	right : 2%;\n	width :100%;\n	text-align : right;\n}\n.nowloading>.progress>.logo {\n	display : inline-block;\n	width : 16px;\n	height : 16px;\n}";
     (document.querySelector("head")).appendChild(style);
   };
 
@@ -128,6 +128,8 @@
 
   speedElems = [];
 
+  isWorking = false;
+
   moveFrame = function() {
     var action, count, currentFrame, elem, maxTime, _i, _len;
     frameCount++;
@@ -138,6 +140,7 @@
       elem.textContent = (elem.getAttribute("lp-text")).substring(0, count);
     }
     if (pageFrameCount <= PAGE_DELAY) {
+      isWorking = true;
       action = null;
       action = after.getAttribute("lp-action");
       if (action) {
@@ -166,6 +169,8 @@
           after.style.opacity = 1.0 - ((maxTime - currentFrame) / (maxTime * 1.0));
         }
       }
+    } else {
+      isWorking = false;
     }
     nextFrame(moveFrame);
   };
@@ -226,6 +231,9 @@
   };
 
   gotoNextSection = function() {
+    if (isWorking) {
+      return;
+    }
     pageFrameCount = 0;
     before = sections[pageCount];
     pageCount++;
@@ -238,6 +246,9 @@
   };
 
   goBackToLastSection = function() {
+    if (isWorking) {
+      return;
+    }
     pageFrameCount = 0;
     before = sections[pageCount];
     pageCount--;
@@ -251,6 +262,9 @@
 
   gotoTargetId = function() {
     var lst;
+    if (isWorking) {
+      return;
+    }
     pageFrameCount = 0;
     lst = (this.getAttribute("lp-touch")).split(":");
     before = after;

@@ -175,6 +175,7 @@ convertParams = (elem) ->
 frameCount = 0
 pageFrameCount = 0
 speedElems = []
+isWorking = false
 
 # Move for frame
 moveFrame = () ->
@@ -184,6 +185,7 @@ moveFrame = () ->
 		count = (pageFrameCount-PAGE_DELAY)*parseInt(elem.getAttribute "lp-speed")*0.02
 		elem.textContent = (elem.getAttribute "lp-text").substring(0,count)
 	if pageFrameCount <= PAGE_DELAY
+		isWorking = true
 		action = null
 		action = after.getAttribute "lp-action"
 		if action
@@ -208,6 +210,8 @@ moveFrame = () ->
 				after.style.display = "block"
 				after.style.transform = "scale("+(Math.sin(Math.PI/(1.0+(currentFrame/maxTime))))+")"
 				after.style.opacity = 1.0-((maxTime-currentFrame)/(maxTime*1.0))
+	else
+		isWorking = false
 	nextFrame moveFrame
 	return
 
@@ -259,6 +263,8 @@ showFirstSection = () ->
 
 # Go to next <section>
 gotoNextSection = () ->
+	if isWorking
+		return
 	pageFrameCount = 0
 	before = sections[pageCount]
 	pageCount++
@@ -271,6 +277,8 @@ gotoNextSection = () ->
 
 # Go back to last <section>
 goBackToLastSection = () ->
+	if isWorking
+		return
 	pageFrameCount = 0
 	before = sections[pageCount]
 	pageCount--
@@ -283,6 +291,8 @@ goBackToLastSection = () ->
 
 # Go to target <section> by id
 gotoTargetId = () ->
+	if isWorking
+		return
 	pageFrameCount = 0
 	lst = (this.getAttribute "lp-touch").split(":")
 	before = after
