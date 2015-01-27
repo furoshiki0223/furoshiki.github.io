@@ -1,11 +1,7 @@
 (function() {
-  var PAGE_DELAY, after, before, convertParams, delayInit, fadeOut, frameCount, getSpeedElement, goBackToLastSection, gotoNextSection, gotoTargetId, init, isMobile, isWorking, maxPageCount, moveFrame, moveProgressView, nextFrame, pageCount, pageFrameCount, popEvent, sections, setCSS, setDefaultCSS, showFirstSection, showLoadView, spaPush, speedElems, switchPage, switchVideoState;
+  var PAGE_DELAY, after, before, convertParams, delayInit, fadeOut, frameCount, getSpeedElement, goBackToLastSection, gotoNextSection, gotoTargetId, init, isMobile, isWorking, maxPageCount, moveFrame, moveProgressView, pageCount, pageFrameCount, popEvent, sections, setCSS, setDefaultCSS, showFirstSection, showLoadView, spaPush, speedElems, switchPage, switchVideoState;
 
   PAGE_DELAY = 60;
-
-  nextFrame = function(fn) {
-    return setTimeout(fn, 1000 / 60);
-  };
 
   isMobile = (navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf('iPad') === -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0;
 
@@ -69,21 +65,26 @@
       }
     }
     cnt = 0;
-    for (_k = 0, _len2 = imageList.length; _k < _len2; _k++) {
-      url = imageList[_k];
-      img = document.createElement("img");
-      img.onload = function() {
-        cnt++;
-        percent.textContent = parseInt((cnt * 100) / imageList.length);
-        if (imageList.length <= cnt) {
-          fadeOut(loadView);
-          return showFirstSection();
-        }
-      };
-      img.onerror = function() {
-        return alert("Can't load resource -> " + url);
-      };
-      img.src = url;
+    if (imageList.length) {
+      for (_k = 0, _len2 = imageList.length; _k < _len2; _k++) {
+        url = imageList[_k];
+        img = document.createElement("img");
+        img.onload = function() {
+          cnt++;
+          percent.textContent = parseInt((cnt * 100) / imageList.length);
+          if (imageList.length <= cnt) {
+            fadeOut(loadView);
+            return showFirstSection();
+          }
+        };
+        img.onerror = function() {
+          return alert("Can't load resource -> " + url);
+        };
+        img.src = url;
+      }
+    } else {
+      fadeOut(loadView);
+      showFirstSection();
     }
   };
 
@@ -299,15 +300,6 @@
     }
   };
 
-  delayInit = function() {
-    if (document.querySelector("body").getAttribute("lp-push") && window.history.pushState) {
-      spaPush = true;
-      window.addEventListener('popstate', popEvent);
-    }
-    showLoadView();
-    moveProgressView();
-  };
-
   popEvent = function(evt) {
     var state;
     state = evt.state;
@@ -320,8 +312,18 @@
     setDefaultCSS();
   };
 
-  init();
+  delayInit = function() {
+    if (document.querySelector("body").getAttribute("lp-push") && window.history.pushState) {
+      spaPush = true;
+      window.addEventListener('popstate', popEvent);
+    }
+    showLoadView();
+    moveProgressView();
+  };
 
-  document.addEventListener("DOMContentLoaded", delayInit);
+  if (document.addEventListener) {
+    init();
+    document.addEventListener("DOMContentLoaded", delayInit);
+  }
 
 }).call(this);

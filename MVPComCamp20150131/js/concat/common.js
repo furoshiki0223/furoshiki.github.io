@@ -1,13 +1,11 @@
 (function() {
-  var PAGE_DELAY, after, before, convertParams, delayInit, fadeOut, frameCount, getSpeedElement, goBackToLastSection, gotoNextSection, gotoTargetId, isMobile, maxPageCount, moveFrame, moveProgressView, nextFrame, pageCount, pageFrameCount, popEvent, sections, setCSS, setDefaultCSS, showFirstSection, showLoadView, spaPush, speedElems, start, switchPage, switchVideoState;
+  var PAGE_DELAY, after, before, convertParams, delayInit, fadeOut, frameCount, getSpeedElement, goBackToLastSection, gotoNextSection, gotoTargetId, init, isMobile, isWorking, maxPageCount, moveFrame, moveProgressView, pageCount, pageFrameCount, popEvent, sections, setCSS, setDefaultCSS, showFirstSection, showLoadView, spaPush, speedElems, switchPage, switchVideoState;
 
   PAGE_DELAY = 60;
 
-  nextFrame = function(fn) {
-    return setTimeout(fn, 1000 / 60);
-  };
-
   isMobile = (navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf('iPad') === -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0;
+
+  isWorking = false;
 
   spaPush = false;
 
@@ -27,10 +25,15 @@
 
   before = null;
 
+  window.LEAPING = {
+    actions: {},
+    PAGE_CHANGE_TIME: PAGE_DELAY
+  };
+
   setDefaultCSS = function() {
     var style;
     style = document.createElement("style");
-    style.textContent = "html,body {\n	margin : 0;\n	padding : 0;\n	background-color : black;\n	color : white;\n	overflow : hidden;\n	width : 100%;\n	height: 100%;\n}\nsection {\n	display : none;\n	position : fixed;\n	top : 0%;\n	left : 0%;\n	width : 100%;\n	height : 100%;\n	background-repeat : no-repeat;\n	background-position : center center;\n	background-size : cover;\n	text-align : center;\n}\n.lpBlock {\n	position : fixed;\n	dipslay : block;\n	width : 100%;\n	left : 0%;\n	top : 0%;\n	text-align : center;\n	margin : 0;\n	padding : 0;\n}\n.nowloading {\n	display : block;\n	position : fixed;\n	top : 0%;\n	left : 0%;\n	width : 100%;\n	height : 100%;\n	background-color: black;\n}\n.nowloading>.progress {\n	position : absolute;\n	bottom : 2%;\n	right : 2%;\n	width :100%;\n	text-align : right;\n}\n.nowloading>.progress>.logo {\n	display : inline-block;\n	width : 16px;\n	height : 16px;\n}";
+    style.textContent = "html,body {\n	margin : 0;\n	padding : 0;\n	background-color : black;\n	color : white;\n	overflow : hidden;\n	width : 100%;\n	height: 100%;\n}\nhtml {\n	touch-action : none;\n}\nsection {\n	display : none;\n	position : fixed;\n	top : 0%;\n	left : 0%;\n	width : 100%;\n	height : 100%;\n	background-repeat : no-repeat;\n	background-position : center center;\n	background-size : cover;\n	text-align : center;\n}\n.lpBlock {\n	position : fixed;\n	dipslay : block;\n	width : 100%;\n	left : 0%;\n	top : 0%;\n	text-align : center;\n	margin : 0;\n	padding : 0;\n}\n.nowloading {\n	display : block;\n	position : fixed;\n	top : 0%;\n	left : 0%;\n	width : 100%;\n	height : 100%;\n	background-color: black;\n}\n.nowloading>.progress {\n	position : absolute;\n	bottom : 2%;\n	right : 2%;\n	width :100%;\n	text-align : right;\n}\n.nowloading>.progress>.logo {\n	display : inline-block;\n	width : 16px;\n	height : 16px;\n}";
     (document.querySelector("head")).appendChild(style);
   };
 
@@ -62,21 +65,26 @@
       }
     }
     cnt = 0;
-    for (_k = 0, _len2 = imageList.length; _k < _len2; _k++) {
-      url = imageList[_k];
-      img = document.createElement("img");
-      img.onload = function() {
-        cnt++;
-        percent.textContent = parseInt((cnt * 100) / imageList.length);
-        if (imageList.length <= cnt) {
-          fadeOut(loadView);
-          return showFirstSection();
-        }
-      };
-      img.onerror = function() {
-        return alert("Can't load resource -> " + url);
-      };
-      img.src = url;
+    if (imageList.length) {
+      for (_k = 0, _len2 = imageList.length; _k < _len2; _k++) {
+        url = imageList[_k];
+        img = document.createElement("img");
+        img.onload = function() {
+          cnt++;
+          percent.textContent = parseInt((cnt * 100) / imageList.length);
+          if (imageList.length <= cnt) {
+            fadeOut(loadView);
+            return showFirstSection();
+          }
+        };
+        img.onerror = function() {
+          return alert("Can't load resource -> " + url);
+        };
+        img.src = url;
+      }
+    } else {
+      fadeOut(loadView);
+      showFirstSection();
     }
   };
 
@@ -136,32 +144,47 @@
   };
 
   moveFrame = function() {
-    var count, currentFrame, elem, maxTime, text, _i, _len;
+    var action, count, currentFrame, elem, maxTime, _i, _len;
     frameCount++;
     pageFrameCount++;
     for (_i = 0, _len = speedElems.length; _i < _len; _i++) {
       elem = speedElems[_i];
       count = (pageFrameCount - PAGE_DELAY) * parseInt(elem.getAttribute("lp-speed")) * 0.02;
-      text = elem.getAttribute("lp-text");
-      if (count <= text.length + 1) {
-        elem.textContent = text.substring(0, count);
-      }
+      elem.textContent = (elem.getAttribute("lp-text")).substring(0, count);
     }
-    if (pageFrameCount < PAGE_DELAY / 2) {
-      maxTime = PAGE_DELAY / 2;
-      before.style.transform = "scale(" + (1.5 + 0.5 * Math.cos(Math.PI / (1.0 + (pageFrameCount / maxTime)))) + ")";
-      before.style.opacity = (maxTime - pageFrameCount) / (maxTime * 1.0);
-    } else if (pageFrameCount <= PAGE_DELAY) {
-      if (before) {
-        before.style.display = "none";
+    if (pageFrameCount <= PAGE_DELAY) {
+      isWorking = true;
+      action = null;
+      action = after.getAttribute("lp-action");
+      if (action) {
+        if (window.LEAPING.actions[action]) {
+          window.LEAPING.actions[action](before, after, pageFrameCount);
+        } else {
+          before.style.opacity = 1.0;
+          before.style.display = "none";
+          after.style.opacity = 1.0;
+          after.style.display = "block";
+          pageFrameCount = PAGE_DELAY;
+        }
+      } else {
+        if (pageFrameCount < PAGE_DELAY / 2) {
+          maxTime = PAGE_DELAY / 2;
+          before.style.transform = "scale(" + (2.0 + Math.cos(Math.PI / (1.0 + (pageFrameCount / maxTime)))) + ")";
+          before.style.opacity = (maxTime - pageFrameCount) / (maxTime * 1.0);
+        } else {
+          if (before) {
+            before.style.display = "none";
+          }
+          maxTime = PAGE_DELAY / 2;
+          currentFrame = pageFrameCount - maxTime;
+          after.style.display = "block";
+          after.style.transform = "scale(" + (Math.sin(Math.PI / (1.0 + (currentFrame / maxTime)))) + ")";
+          after.style.opacity = 1.0 - ((maxTime - currentFrame) / (maxTime * 1.0));
+        }
       }
-      maxTime = PAGE_DELAY / 2;
-      currentFrame = pageFrameCount - maxTime;
-      after.style.display = "block";
-      after.style.transform = "scale(" + (0.5 + 0.5 * Math.sin(Math.PI / (1.0 + (currentFrame / maxTime)))) + ")";
-      after.style.opacity = 1.0 - ((maxTime - currentFrame) / (maxTime * 1.0));
+    } else {
+      isWorking = false;
     }
-    nextFrame(moveFrame);
   };
 
   getSpeedElement = function(elem) {
@@ -198,7 +221,6 @@
   };
 
   showFirstSection = function() {
-    var afterId;
     pageFrameCount = PAGE_DELAY / 2;
     pageCount = 0;
     sections = document.querySelectorAll("section");
@@ -206,9 +228,8 @@
     after = sections[pageCount];
     speedElems = getSpeedElement(after);
     after.style.display = "block";
-    moveFrame();
+    setInterval(moveFrame, 1000 / 60);
     switchVideoState();
-    afterId = after.getAttribute("id");
     if (spaPush && afterId) {
       history.pushState({
         id: afterId
@@ -218,6 +239,9 @@
 
   gotoNextSection = function() {
     var afterId;
+    if (isWorking) {
+      return;
+    }
     pageFrameCount = 0;
     before = sections[pageCount];
     pageCount++;
@@ -231,7 +255,9 @@
   };
 
   goBackToLastSection = function() {
-    var afterId;
+    if (isWorking) {
+      return;
+    }
     pageFrameCount = 0;
     before = sections[pageCount];
     pageCount--;
@@ -241,11 +267,13 @@
     after = sections[pageCount];
     speedElems = getSpeedElement(after);
     switchVideoState();
-    afterId = after.getAttribute("id");
   };
 
   gotoTargetId = function() {
     var afterId, lst;
+    if (isWorking) {
+      return;
+    }
     lst = (this.getAttribute("lp-touch")).split(":");
     afterId = lst[1];
     switchPage(afterId);
@@ -272,15 +300,6 @@
     }
   };
 
-  delayInit = function() {
-    if (document.querySelector("body").getAttribute("lp-push") && window.history.pushState) {
-      spaPush = true;
-      window.addEventListener('popstate', popEvent);
-    }
-    showLoadView();
-    setTimeout(moveProgressView, 0);
-  };
-
   popEvent = function(evt) {
     var state;
     state = evt.state;
@@ -289,11 +308,22 @@
     }
   };
 
-  start = function() {
+  init = function() {
     setDefaultCSS();
-    document.addEventListener("DOMContentLoaded", delayInit);
   };
 
-  start();
+  delayInit = function() {
+    if (document.querySelector("body").getAttribute("lp-push") && window.history.pushState) {
+      spaPush = true;
+      window.addEventListener('popstate', popEvent);
+    }
+    showLoadView();
+    moveProgressView();
+  };
+
+  if (document.addEventListener) {
+    init();
+    document.addEventListener("DOMContentLoaded", delayInit);
+  }
 
 }).call(this);

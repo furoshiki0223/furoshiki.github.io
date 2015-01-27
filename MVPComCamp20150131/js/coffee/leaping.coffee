@@ -1,20 +1,13 @@
 ##############################################
 # LeapingJS - Engine Core
+# 
 # Copyright (c) 2014,2015 Queue Sakura-Shiki
+# Copyright (c) 2015      Hiroshi Kawada
 # Released under the MIT license
 # 
 
 # Page switching time
 PAGE_DELAY = 60
-
-# Polyfills for AnimationFrame API
-nextFrame = 
-# window.requestAnimationFrame || 
-# window.mozRequestAnimationFrame || 
-# window.msRequestAnimationFrame || 
-# window.webkitRequestAnimationFrame ||
-(fn) -> setTimeout fn,1000/60
-
 
 # chacking mobile or not
 isMobile = (navigator.userAgent.indexOf('iPhone') > 0 &&
@@ -54,6 +47,7 @@ before = null
 
 # for plugins
 window.LEAPING = { actions : {}, PAGE_CHANGE_TIME : PAGE_DELAY };
+
 
 #######################################
 # Set default CSS Values
@@ -146,17 +140,21 @@ moveProgressView = () ->
 		if bg
 			imageList.push bg
 	cnt = 0
-	for url in imageList
-		img = document.createElement "img"
-		img.onload = () ->
-			cnt++
-			percent.textContent = parseInt((cnt*100)/imageList.length)
-			if imageList.length <= cnt
-				fadeOut loadView
-				showFirstSection()
-		img.onerror = () ->
-			alert "Can't load resource -> " + url
-		img.src = url
+	if imageList.length
+		for url in imageList
+			img = document.createElement "img"
+			img.onload = () ->
+				cnt++
+				percent.textContent = parseInt((cnt*100)/imageList.length)
+				if imageList.length <= cnt
+					fadeOut loadView
+					showFirstSection()
+			img.onerror = () ->
+				alert "Can't load resource -> " + url
+			img.src = url
+	else
+		fadeOut loadView
+		showFirstSection()
 
 	return
 
@@ -353,6 +351,22 @@ setCSS = (elems,styleName,value) ->
 
 
 #######################################
+# Do when popState events fires.
+popEvent = (evt) ->
+	state = evt.state
+	if state.id
+		switchPage state.id
+	return
+
+
+#######################################
+# Initialize immediately.
+init = () ->
+	setDefaultCSS();
+	return
+
+
+#######################################
 # Initialize before all of the elements are loaded.
 delayInit = () ->
 	if document.querySelector("body").getAttribute("lp-push") && window.history.pushState
@@ -363,21 +377,7 @@ delayInit = () ->
 	return
 
 #######################################
-# for popState events.
-popEvent = (evt) ->
-	state = evt.state
-	if state.id
-		switchPage state.id
-	return
-
-
-#######################################
-# execute this program.
-init = () ->
-	setDefaultCSS();
-	return
-
-
-init()
-document.addEventListener "DOMContentLoaded", delayInit
-
+# Do it on IE8+
+if document.addEventListener
+	init()
+	document.addEventListener "DOMContentLoaded", delayInit

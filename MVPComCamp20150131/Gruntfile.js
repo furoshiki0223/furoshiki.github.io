@@ -50,7 +50,7 @@ module.exports = function (g) {
 		uglify: {
 			dist: {
 				files: {
-					'js/common-min.js': 'js/concat/common.js'
+					'js/leaping-min.js': 'js/concat/common.js'
 				}
 			}
 		},

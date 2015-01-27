@@ -1,8 +1,274 @@
 <!DOCTYPE html>
-<title>furoshiki web page</title>
-<h1>furoshiki web page</h1>
-<ul>
-  <li><a href="htmlconf2015">htmlconf2015</a>
-  <li><a href="cordova03">cordova03</a>
-</ul>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,500' rel='stylesheet' type='text/css'>
+    <style>
+    /* 全体の共通デザイン */
+    html,body {
+      margin : 0 0;
+      padding : 12px;
+      color :#464646;
+      font-family: 'Roboto',Helvetica,Arial,sans-serif;
+      font-weight : 300;
+    	line-height : 150%;
+    }
+    h1,h2,h3,h4,h5 {
+      font : inherit;
+      padding : 0 0;
+      margin : 0 0;
+    }
+    h1 {
+    	font-size : 46px;
+    	text-align : center;
+    	margin-top : 30px;
+    	margin-bottom : 30px;
+    }
+    h2 {
+    	border-left: 4px solid #464646;
+    }
+    .self {
+    	border-radius : 100px;
+    	max-width : 200px;
+    	margin : 0 auto;
+    	display : block;
+    }
+    .container {
+    	margin : 0 auto;
+    	max-width : 800px;
+    }
+    header {
+    	text-align : right;
+	    	font-size : 16px;
+    }
+    h2,section,ul {
+    	float : left;
+    	margin : 0 0;
+    	padding : 0 0;
+    }
+    li {
+    	margin-bottom : 20px;
+    }
+    article:after {
+    	content : "";
+    	display : block;
+    	clear : both;
+    }
+    footer {
+    	text-align : center;
+    	margin-top : 30px;
+    	border-top : 1px silver solid;
+    	padding-top : 10px;
+    }
+    p {
+    	margin : 0 0;
+    	margin-bottom : 20px;
+    }
+    time,strong {
+    	display : block;
+      font-weight : 500;
+      letter-spacing:0.1em
+    }
+    a {
+    	text-decoration : underline;    	
+      color :#464646;
+    }
+    li>a {
+    	text-decoration : none;
+      color :#464646;
+    	display : block;
+    }
+    li>a:hover {
+    	background-color : #CCF;
+    	text-decoration : underline;
+    }
+    img.right {
+    	float :right;
+    	margin-left : 10px;
+    	margin-top : 10px;
+    	margin-bottom : 10px;
+    	display : block;
+    }
+    img.center {
+			display : block; 
+			margin : 30px auto;
+			max-width : 100%;
+			border : 1px solid silver;
+			box-shadow : 0px 0px 6px gray;
+    }
+    .presented {
+    	display : inline-block;
+    	background-color : #DDF;
+    	text-align :center;
+    	font-size : 80%;
+    	border-radius : 10px;
+    	padding : 0px 5px;
+    	margin-right : 5px;
+    	text-shadow : 1px 1px 1px #FFF, -1px -1px #55A;
+    }
+    .published {
+    	display : inline-block;
+    	background-color : #DFD;
+    	text-align :center;
+    	font-size : 80%;
+    	border-radius : 10px;
+    	padding : 0px 5px;
+    	margin-right : 5px;
+    	text-shadow : 1px 1px 1px #FFF, -1px -1px #5A5;
+    }
+    .contribute {
+    	display : inline-block;
+    	background-color : #FDD;
+    	text-align :center;
+    	font-size : 80%;
+    	border-radius : 10px;
+    	padding : 0px 5px;
+    	margin-right : 5px;
+    	text-shadow : 1px 1px 1px #FFF, -1px -1px #A55;
+    }
+    iframe {
+      margin-top : 20px !important;
+    }
+    @media (max-width: 640px) {
+    	body {
+	    	font-size : 21px;
+	    }
+	    h2 {
+				width : 100%;
+				height : inherit;
+				text-align : left;
+				font-size : 32px;
+				border-top : 1px solid #464646;
+				padding-top : 12px;
+				padding-bottom : 12px;
+      	padding-left : 15px;
+      	margin-bottom : 15px;
+	    }
+	    section,ul {
+				width : 100%;
+				list-style : none;
+	    }
+    }
+    @media (min-width: 640px) {
+    	body {
+	    	font-size : 16px;
+	    }
+	    h2 {
+				width : 30%;
+				text-align : left;
+				font-size : 22px;
+				border-top : 0 0;
+				padding-top : 0;
+				padding-bottom : 0;
+      	padding-left : 10px;
+      	margin-bottom : 0px;
+	    }
+	    section,ul {
+				width : 65%;
+				list-style : inherit;
+	    }
+    }
+    </style>
+    <title>Hiroshi Kawada(川田 寛)</title>
+  </head>
+  <body>
+  	<!--[if IE]>
+    <div style="color:red;display:block; margin: 30px auto; width:800px; border:3px solid red;padding:10px;">
+    	<img src="img/alert.png" style="margin:0 auto;display:block;" />
+    <p>Hey, listen! Our world needs peace, and you should know how to make your life better. Please pay attention to your browser's version. If you don't know what the browser means, check <a href="http://whatbrowser.org/">this</a>. Then upgrade your Internet Explorer.</p>
+    <p>Please help Web Developers. We want to change the world. But your browser obstructs that.</p>
+    <p>Thank you. </p></div>
+    <![endif]-->
+  	<header><div class="container"></div></header>
+  	<article class="container">
+  		<img src="img/self.jpg" class="self" />
+  	  <h1>Hiroshi Kawada</h1>
+  	  <p>A Japanese business application front-end engineer who is interested in the movement of HTML5 Enterprise Technology, Web Performance and Browser's Features for Enterprise IT operation. Follow me on <a class="sp" href="https://twitter.com/kawada_hiroshi">Twitter</a>. Read entries on my <a class="sp" href="http://furoshiki.hatenadiary.jp/">Blog</a>. (Almost all Japanese only...)</p>
 
+      <h2>Community</h2>
+      <ul>
+      	<li><a href="http://html5biz.org"><img class="right" src="img/html5jenterprise.png" /><strong>html5j Enterprise</strong>Technical community in Japan, collaborate with html5j and discuss the use of Web standards technology for enterprise application. We have held events once for a month, since February 2013. We keep non-commerciality and neutrality on technical.</a></li>
+
+      	<li><a href="http://mvp.microsoft.com/en-us/MVP/Hiroshi%20Kawada-5000696"><img class="right" src="img/mvp.png" /><strong>Microsoft MVP for Internet Explorer</strong>In my opinion, Internet Explorer has the best functionality for enterprise browser. HTML5 support is not good, but advanced administration functions help us to make enterprise application better. When I wrote it on my blog, Team IE(JPN) gave this award.</a></li>
+
+      </ul>
+      <h2>2014 3Q</h2>
+      <ul>
+
+      	<li><a href="http://www.sbbit.jp/article/cont1/28197"><time>7th July</time>What's the Hybrid Development Product called "Apache Cordova"? (ja:HTML5によるハイブリッドアプリ開発の「Apache Cordova」とは？IBMやSAPがなぜ注目？)</a><img class="center" src="img/bi201407.png" /></li>
+
+      </ul>
+      <h2>2014 2Q</h2>
+      <ul>
+
+      	<li><a href="http://gihyo.jp/magazine/SD/archive/2014/201407"><time>18th June</time>Software Design 2014.07 - How to make the performance better using Web Standards #03. (ja:技術評論社 Software Design 2014年7月号 - Web標準技術によるWebのパフォーマンス改善 第3回)</a><img class="center" src="img/sd201407.jpg" /></li>
+
+      	<li><a href="http://www.slideshare.net/kawada_hiroshi/5-apache-cordova"><time>10th June</time>Why is Apache Cordova so hot? (ja:Apache Cordovaスーパー勉強会#01 - 5分でわかる ”Apache Cordova” がなぜアツいのか？)</a><iframe src="http://www.slideshare.net/slideshow/embed_code/35691044" width="520" height="430" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe></li>
+
+      	<li><a href="http://gihyo.jp/magazine/SD/archive/2014/201406"><time>17th May</time>Software Design 2014.06 - How to make the performance better using Web Standards #02. (ja:技術評論社 Software Design 2014年6月号 - Web標準技術によるWebのパフォーマンス改善 第2回)</a><img class="center" src="img/sd201406.jpg" /></li>
+
+      	<li><a href="http://html5experts.jp/furoshiki/6242/"><time>2nd May</time>Only Navigation Timing allows Web performance to audit transversely. (ja:NTTコミュニケーションズ HTML5 Experts.jp - Navigation Timingだからできる、Webアプリを俯瞰したパフォーマンス計測)</a><img class="center" src="img/hx0405.png" /></li>
+
+      	<li><a href="http://gihyo.jp/magazine/SD/archive/2014/201405"><time>18th April</time>Software Design 2014.05 - How to make the performance better using Web Standards #01. (ja:技術評論社 Software Design 2014年5月号 - Web標準技術によるWebのパフォーマンス改善 第1回)</a><img class="center" src="img/sd201405.jpg" /></li>
+
+      	<li><a href="https://codeiq.jp/magazine/2014/04/8576/"><time>9th April</time>Web love and hate Internet Explorer 6. (ja:リクルート CodeIQ Magazine - 愛と憎しみのIE6──当時のIE開発者と現開発者が本音と思い出を語り合う)</a><img class="center" src="img/codeiq201404.png" /></li>
+
+      	<li><a href="http://www.slideshare.net/kawada_hiroshi/google-chrome-36963249"><time>9th April</time>Is Google Chrome available for Enterprise. (ja:Google Chromeは 企業系システムへの適用に 向いているのか？)</a><iframe src="http://www.slideshare.net/slideshow/embed_code/36963249" width="520" height="430" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe></li>
+
+      	<li><a href="http://itpro.nikkeibp.co.jp/article/MAG/20140401/547464/"><time>8th April</time>Nikkei Linux 2014.05 - Visiting a Community. (ja:日経BP社 日経Linux 2014年5月号 - OSS支える、コミュニティー訪問)</a><img class="center" src="img/nl201405.jpg" /></li>
+
+      	<li><a href="http://html5experts.jp/yusuke-naka/5802/"><time>1st April</time>HTML5 & Enterprise, Past, Present and Futures. (HTML5とエンタープライズITの過去、現在、そして未来を議論する)</a><img class="center" src="img/hx0404.png" /></li>
+
+      </ul>
+      <h2>2014 1Q</h2>
+      <ul>
+
+      	<li><a href="http://www.atmarkit.co.jp/ait/articles/1403/28/news037.html"><time>28th March</time>Four Meanings of HTML5 for Enterprise Developers. (ja:＠IT - エンタープライズ開発現場が知っておきたいHTML5の4つの意義)</a><img class="center" src="img/atit201403.png" /></li>
+
+      	<li><a href="http://www.sbbit.jp/article/cont1/27693"><time>13th March</time>Why is HTML5 important for Enterprise IT. (ja:＠IT - なぜエンタープライズITでHTML5が注目されているのか？Web業界のキーパーソンが議論</a><img class="center" src="img/bi201403.png" /></li>
+
+      	<li><a href="http://event.shoeisha.jp/devsumi/20140213/timetable/"><time>28th February</time>Enterprise x HTML5 Web Application Conference 2014 - Three HTML5 Needs of Enterprise. (ja:エンタープライズ領域のHTML5 3つのニーズ)</a><iframe src="http://www.slideshare.net/slideshow/embed_code/31834993" width="520" height="430" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe></li>
+
+      	<li><a href="pdf/ms201402.pdf"><time>27th February</time>You should know, if you want to save your Enterprise System for 10 years. (ja:IE11プライベートセミナー - これから10年間企業のシステムを守るために知っておくべきこと)</a><img class="center" src="img/ms201402.png"></li>
+
+      	<li><a href="http://event.shoeisha.jp/devsumi/20140213/timetable/"><time>13th February 2014</time>Developers Summit 2014 - The impact of System Integrators by HTML5. What should we learn? (ja:HTML5がSIに与えた衝撃、エンジニアは何を学ぶべきか？)</a><iframe src="http://www.slideshare.net/slideshow/embed_code/31153964" width="520" height="430" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen></iframe></li>
+
+      	<li><a href="http://gihyo.jp/magazine/SD/archive/2014/201402"><time>18th January</time>Software Design 2014.02 - What's the Point of Change on Software Development by Web Standards movements ? (ja:技術評論社 Software Design 2014年2月号 - ソフトウェア開発はどのように変わるのか？ Web標準編)</a><img class="center" src="img/sd201402.jpg" /></li>
+
+      </ul>
+      <h2>2013 4Q</h2>
+      <ul>
+
+      	<li><a href="http://windows8.submit.ne.jp/start/1176"><time>10th December</time>Submit x Windows 8 by Microsoft Japan - The Cheat-sheet of how to create effective IE11 Websites. For only 11 minutus.(ja: 日本マイクロソフト さぶみっと x Windows 8 - 11分で覚える、IE11対応Web制作のカンニングペーパー</a><img class="center" src="img/submit.png" /></li>
+
+        <li><a href="http://www.slideshare.net/kawada_hiroshi/2-28756007"><time>30th Norvember</time>Changing Enterprise by HTML5 that nobody thinks it's nacesary.(ja:HTML5 Conference 2014 - 無縁だと思われていたHTML5がエンタープライズWeb開発の特性を変えてしまった)</a><iframe src="http://www.slideshare.net/slideshow/embed_code/28756007" width="520" height="430" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe></li>
+
+      	<li><a href="http://www.slideshare.net/kawada_hiroshi/internet-explorerie"><time>22th Norvember</time>Lightning Talk - In Japan, there are many applications, depend on Internet Explorer function. They kept temporarily by IE, but it never works next time. I alert that risk.(ja:Internet ExplorerはIE特化アプリから一時的に日本を救ってくれたけど次回はもう助けてくれないよという警告)</a><iframe src="http://www.slideshare.net/slideshow/embed_code/28608492" width="520" height="430" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin:5px auto; max-width: 100%;" allowfullscreen> </iframe></li>
+
+        <li><a href="http://www.slideshare.net/kawada_hiroshi/osshtml5riaweb"><time>16th Norvember</time>Full OSS & HTML5 & RIA Development.(ja:OSC 2013 Fukuoka - フルOSSでHTML5-RIAなWeb開発)</a><iframe src="http://www.slideshare.net/slideshow/embed_code/28331658" width="520" height="430" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe></li>
+
+        <li><a href="http://www.slideshare.net/kawada_hiroshi/html5webjava3"><time>9th Norvember</time>The 3 argues for Web Application and Java mixes each other.(ja:JJUG CCC 2013/Fall - HTML5時代のWebアプリとJavaが融合するための3つの議論)</a><iframe src="http://www.slideshare.net/slideshow/embed_code/28069821" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe></li>
+
+        <li><a href="http://gihyo.jp/news/report/2013/08/0901"><time>31th October</time>Joining HTML5 World. What is the change of Visual Studio 2013.(ja: Halloween Web Night - Visual Studio 2013 は何が違うのか？ HTML5時代に整合したWeb開発環境)</a><iframe src="http://www.slideshare.net/slideshow/embed_code/27780782" width="520" height="430" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe></li>
+
+        <li><a href="http://gihyo.jp/news/report/2013/09/1901"><time>25th September</time>Now, Enterprise Applications DO NOT use Struts.(ja: gihyo.jp - 「業務系システムは今すぐ脱Strutsを！」業務システムエンジニアのためのHTML5勉強会#04 活動報告)</a><img class="center" src="img/gh0309.png" /></li>
+
+      </ul>
+      <h2>2013 3Q</h2>
+      <ul>
+
+        <li><a href="http://www.slideshare.net/kawada_hiroshi/web-25756788"><time>30th August</time>Begining Web Forms Design.(ja:Webの入力フォームデザイン入門)</a><iframe src="http://www.slideshare.net/slideshow/embed_code/25756788" width="520" height="430" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe></li>
+
+        <li><a href="http://gihyo.jp/news/report/2013/08/0901"><time>12th August</time>Enterprise Web without IE6.(ja: gihyo.jp - 脱IE6を果たしたエンタープライズのWebシステム，そしてHTML5 ～「業務システムエンジニアのためのHTML5勉強会#03」活動報告)</a><img class="center" src="img/gh0308.png" /></li>
+
+      	<li><a href="http://www.slideshare.net/kawada_hiroshi/label-25135849"><time>9th August</time>LLM-UI/UX - Japan Label Element Markup Exam.(ja:全日本＜LABEL＞要素マークアップ検定)</a><iframe src="http://www.slideshare.net/slideshow/embed_code/25135849" width="520" height="430" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin:5px auto; max-width: 100%;" allowfullscreen> </iframe></li>
+
+      	<li><a href="http://event.shoeisha.jp/detail/46/session/89/"><time>1st August</time>Developers Summit 2013 Summer - HTML5 x System Integrators. Business application needs the power of Web technology!(ja:HTML5 x SIer - 業務システムこそWebの力が必要だ！)</a><iframe src="http://www.slideshare.net/slideshow/embed_code/24862123" width="520" height="430" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe></li>
+
+      </ul>
+
+  	</article>
+  	<footer>- Copyright Hiroshi Kawada 2014 All Rights Reserved. -</footer>
+  </body>
+</html>
