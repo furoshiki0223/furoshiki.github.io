@@ -243,7 +243,7 @@ moveFrame = () ->
 				after.style.opacity = 1.0-((maxTime-currentFrame)/(maxTime*1.0))
 	else
 		isWorking = false
-	nextFrame moveFrame
+	# nextFrame moveFrame
 	return
 
 #######################################
@@ -282,7 +282,7 @@ showFirstSection = () ->
 	after = sections[pageCount]
 	speedElems = getSpeedElement after
 	after.style.display = "block"
-	moveFrame()
+	setInterval moveFrame, 1000/60
 	switchVideoState()
 	if spaPush && afterId
 		history.pushState({id:afterId}, null, "#"+afterId);

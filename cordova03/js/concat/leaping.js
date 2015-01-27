@@ -184,7 +184,6 @@
     } else {
       isWorking = false;
     }
-    nextFrame(moveFrame);
   };
 
   getSpeedElement = function(elem) {
@@ -228,7 +227,7 @@
     after = sections[pageCount];
     speedElems = getSpeedElement(after);
     after.style.display = "block";
-    moveFrame();
+    setInterval(moveFrame, 1000 / 60);
     switchVideoState();
     if (spaPush && afterId) {
       history.pushState({
