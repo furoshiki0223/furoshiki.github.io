@@ -1,7 +1,6 @@
-/* format("woff"), */
 @font-face {
   font-family: 'normal';
-  src:  url("../font/KFhimaji.otf") format("opentype");
+  src: url("../font/KFhimaji.woff") format("woff"), url("../font/KFhimaji.otf") format("opentype");
 }
 html {
 	overflow : hidden;

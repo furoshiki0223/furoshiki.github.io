@@ -1,23 +1,22 @@
-/* format("woff"), */
 @font-face {
   font-family: 'normal';
-  src: url("../font/KFhimaji.otf") format("opentype"); }
-/* line 6, ../sass/index.scss */
+  src: url("../font/KFhimaji.woff") format("woff"), url("../font/KFhimaji.otf") format("opentype"); }
+/* line 5, ../sass/index.scss */
 html {
   overflow: hidden;
   font-family: 'normal', meiryo, sans-serif;
   margin: 0;
   padding: 0; }
-/* line 11, ../sass/index.scss */
+/* line 10, ../sass/index.scss */
 html body {
   text-align: center; }
-/* line 13, ../sass/index.scss */
+/* line 12, ../sass/index.scss */
 html body h1 {
   font-weight: normal;
   margin: 3% 0%;
   padding: 0;
   font-size: 150%; }
-/* line 19, ../sass/index.scss */
+/* line 18, ../sass/index.scss */
 html body .pict {
   position: fixed;
   left: 0%;
@@ -28,27 +27,27 @@ html body .pict {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: left bottom; }
-/* line 30, ../sass/index.scss */
+/* line 29, ../sass/index.scss */
 html body .pr {
   text-align: left;
   position: fixed;
   top: 15%;
   left: 45%; }
-/* line 35, ../sass/index.scss */
+/* line 34, ../sass/index.scss */
 html body .pr li {
   margin-bottom: 3%; }
-/* line 37, ../sass/index.scss */
+/* line 36, ../sass/index.scss */
 html body .pr li a {
   text-decoration: none;
   color: inherit;
   transition-duration: 0.5s;
   display: inline-block;
   width: 100%; }
-/* line 44, ../sass/index.scss */
+/* line 43, ../sass/index.scss */
 html body .pr li a:hover {
   color: white;
   background-color: black; }
-/* line 50, ../sass/index.scss */
+/* line 49, ../sass/index.scss */
 html body .books {
   list-style: none;
   padding: 0;
@@ -56,10 +55,10 @@ html body .books {
   position: fixed;
   top: 80%;
   left: 40%; }
-/* line 57, ../sass/index.scss */
+/* line 56, ../sass/index.scss */
 html body .books li {
   display: inline-block;
   width: 12%; }
-/* line 60, ../sass/index.scss */
+/* line 59, ../sass/index.scss */
 html body .books li img {
   width: 100%; }
