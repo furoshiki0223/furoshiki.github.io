@@ -1,10 +1,8 @@
-##############################################
+##############################################################
 # LeapingJS - Engine Core
 # 
-# Copyright (c) 2014,2015 Queue Sakura-Shiki
-# Copyright (c) 2015      Hiroshi Kawada
+# Copyright (c) 2014,2015 Sakura-Shiki, Hiroshi Kawada
 # Released under the MIT license
-# 
 
 # Page switching time
 PAGE_DELAY = 60
@@ -29,6 +27,9 @@ pageFrameCount = 0
 
 # mutated visual state elements on the virtual pages
 speedElems = []
+
+# show delay element.
+delayElems = []
 
 # cached section elements.
 sections = []
@@ -78,6 +79,17 @@ setDefaultCSS = () ->
 			background-size : cover;
 			text-align : center;
 		}
+		.img {
+			display : block;
+			position : fixed;
+			top : 15%;
+			left : 0%;
+			width : 100%;
+			height : 70%;
+			background-repeat : no-repeat;
+			background-position : center center;
+			background-size : contain;
+		}
 		.lpBlock {
 			position : fixed;
 			dipslay : block;
@@ -87,6 +99,12 @@ setDefaultCSS = () ->
 			text-align : center;
 			margin : 0;
 			padding : 0;
+		}
+		.alignLeft {
+			text-align : left;
+		}
+		.alignRight {
+			text-align : right;
 		}
 		.nowloading {
 			display : block;
@@ -153,6 +171,7 @@ moveProgressView = () ->
 				alert "Can't load resource -> " + url
 			img.src = url
 	else
+		percent.textContent = "100"
 		fadeOut loadView
 		showFirstSection()
 
@@ -183,26 +202,36 @@ convertParams = (elem) ->
 	bg = elem.getAttribute "lp-bg"
 	if bg
 		elem.style.backgroundImage = "url("+bg+")"
-	x = elem.getAttribute "lp-x"
-	if x
-		elem.setAttribute "class", classStr+" lpBlock"
-		elem.style.left = x+"%"
 	y = elem.getAttribute "lp-y"
 	if y
 		elem.setAttribute "class", classStr+" lpBlock"
 		elem.style.top = y+"%"
+	x = elem.getAttribute "lp-x"
+	if x
+		if x<=50
+			elem.setAttribute "class", classStr+" lpBlock alignLeft"
+		else 
+			elem.setAttribute "class", classStr+" lpBlock alignRight"
+		elem.style.left = x+"%"
+	img = elem.getAttribute "lp-img"
+	if img
+		elem.style.backgroundImage = "url("+img+")"
+		elem.setAttribute "class", classStr+" img"
 	if elem.getAttribute "lp-speed"
 		elem.setAttribute "lp-text", elem.textContent
 	touch = elem.getAttribute "lp-touch"
 	if touch
 		if touch == "next"
 			elem.addEventListener "click",gotoNextSection
+			elem.style.cursor = "pointer"
 		else if touch == "back"
 			elem.addEventListener "click",goBackToLastSection
+			elem.style.cursor = "pointer"
 		else
 			lst = touch.split(":")
 			if lst[0] == "goto"
 				elem.addEventListener "click",gotoTargetId
+				elem.style.cursor = "pointer"
 	return
 
 #######################################
@@ -213,6 +242,9 @@ moveFrame = () ->
 	for elem in speedElems
 		count = (pageFrameCount-PAGE_DELAY)*parseInt(elem.getAttribute "lp-speed")*0.02
 		elem.textContent = (elem.getAttribute "lp-text").substring(0,count)
+	if pageFrameCount == 1
+		for elem in delayElems
+			elem.style.visibility = "hidden"
 	if pageFrameCount <= PAGE_DELAY
 		isWorking = true
 		action = null
@@ -229,7 +261,7 @@ moveFrame = () ->
 		else
 			if pageFrameCount < PAGE_DELAY/2
 				maxTime = PAGE_DELAY/2
-				before.style.transform = "scale("+(2.0+Math.cos(Math.PI/(1.0+(pageFrameCount/maxTime))))+")"
+				before.style.transform = "scale("+(2.0+Math.cos(Math.PI/(1.0+((0.5*pageFrameCount)/maxTime))))+")"
 				before.style.opacity = ((maxTime-pageFrameCount)/(maxTime*1.0))
 			else
 				if before
@@ -245,13 +277,24 @@ moveFrame = () ->
 	return
 
 #######################################
-# Get the elements which have lp-speed attribute
+# Get the elements that have lp-speed attribute
 getSpeedElement = (elem) ->
 	list = []
 	elems = elem.getElementsByTagName "*"
 	for d in elems
 		speed = d.getAttribute "lp-speed"
 		if speed
+			list.push d
+	return list
+
+#######################################
+# Get the elements that have lp-delay attribute
+getDelayElement = (elem) ->
+	list = []
+	elems = elem.getElementsByTagName "*"
+	for d in elems
+		delay = d.getAttribute "lp-delay"
+		if delay != null && delay != false
 			list.push d
 	return list
 
@@ -291,6 +334,10 @@ showFirstSection = () ->
 gotoNextSection = () ->
 	if isWorking
 		return
+	if delayElems.length
+		elem = delayElems.shift()
+		elem.style.visibility = "visible"
+		return
 	pageFrameCount = 0
 	before = sections[pageCount]
 	pageCount++
@@ -298,6 +345,7 @@ gotoNextSection = () ->
 		pageCount = 0
 	after = sections[pageCount]
 	speedElems = getSpeedElement after
+	delayElems = getDelayElement after
 	switchVideoState()
 
 	afterId = after.getAttribute "id"
@@ -308,6 +356,10 @@ gotoNextSection = () ->
 goBackToLastSection = () ->
 	if isWorking
 		return
+	if delayElems.length
+		elem = delayElems.shift()
+		elem.style.visibility = "visible"
+		return
 	pageFrameCount = 0
 	before = sections[pageCount]
 	pageCount--
@@ -315,6 +367,7 @@ goBackToLastSection = () ->
 		pageCount = maxPageCount-1
 	after = sections[pageCount]
 	speedElems = getSpeedElement after
+	delayElems = getDelayElement after
 	switchVideoState()
 	return
 
@@ -338,6 +391,7 @@ switchPage = (afterId) ->
 
 	pageFrameCount = 0
 	speedElems = getSpeedElement after
+	delayElems = getDelayElement after
 	switchVideoState()
 	return
 
@@ -363,6 +417,16 @@ popEvent = (evt) ->
 # Initialize immediately.
 init = () ->
 	setDefaultCSS();
+	html = document.querySelector "html"
+	ajastFontSize = () ->
+		widthSize = parseInt(window.innerWidth*0.3);
+		heightSize = parseInt(window.innerHeight*0.4);
+		if heightSize < widthSize
+			html.style.fontSize = heightSize+"%"
+		else
+			html.style.fontSize = widthSize+"%"
+	window.addEventListener "resize", ajastFontSize
+	ajastFontSize()
 	return
 
 

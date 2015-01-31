@@ -1,5 +1,5 @@
 (function() {
-  var PAGE_DELAY, after, before, convertParams, delayInit, fadeOut, frameCount, getSpeedElement, goBackToLastSection, gotoNextSection, gotoTargetId, init, isMobile, isWorking, maxPageCount, moveFrame, moveProgressView, pageCount, pageFrameCount, popEvent, sections, setCSS, setDefaultCSS, showFirstSection, showLoadView, spaPush, speedElems, switchPage, switchVideoState;
+  var PAGE_DELAY, after, before, convertParams, delayElems, delayInit, fadeOut, frameCount, getDelayElement, getSpeedElement, goBackToLastSection, gotoNextSection, gotoTargetId, init, isMobile, isWorking, maxPageCount, moveFrame, moveProgressView, pageCount, pageFrameCount, popEvent, sections, setCSS, setDefaultCSS, showFirstSection, showLoadView, spaPush, speedElems, switchPage, switchVideoState;
 
   PAGE_DELAY = 60;
 
@@ -14,6 +14,8 @@
   pageFrameCount = 0;
 
   speedElems = [];
+
+  delayElems = [];
 
   sections = [];
 
@@ -33,7 +35,7 @@
   setDefaultCSS = function() {
     var style;
     style = document.createElement("style");
-    style.textContent = "html,body {\n	margin : 0;\n	padding : 0;\n	background-color : black;\n	color : white;\n	overflow : hidden;\n	width : 100%;\n	height: 100%;\n}\nhtml {\n	touch-action : none;\n}\nsection {\n	display : none;\n	position : fixed;\n	top : 0%;\n	left : 0%;\n	width : 100%;\n	height : 100%;\n	background-repeat : no-repeat;\n	background-position : center center;\n	background-size : cover;\n	text-align : center;\n}\n.lpBlock {\n	position : fixed;\n	dipslay : block;\n	width : 100%;\n	left : 0%;\n	top : 0%;\n	text-align : center;\n	margin : 0;\n	padding : 0;\n}\n.nowloading {\n	display : block;\n	position : fixed;\n	top : 0%;\n	left : 0%;\n	width : 100%;\n	height : 100%;\n	background-color: black;\n}\n.nowloading>.progress {\n	position : absolute;\n	bottom : 2%;\n	right : 2%;\n	width :100%;\n	text-align : right;\n}\n.nowloading>.progress>.logo {\n	display : inline-block;\n	width : 16px;\n	height : 16px;\n}";
+    style.textContent = "html,body {\n	margin : 0;\n	padding : 0;\n	background-color : black;\n	color : white;\n	overflow : hidden;\n	width : 100%;\n	height: 100%;\n}\nhtml {\n	touch-action : none;\n}\nsection {\n	display : none;\n	position : fixed;\n	top : 0%;\n	left : 0%;\n	width : 100%;\n	height : 100%;\n	background-repeat : no-repeat;\n	background-position : center center;\n	background-size : cover;\n	text-align : center;\n}\n.img {\n	display : block;\n	position : fixed;\n	top : 15%;\n	left : 0%;\n	width : 100%;\n	height : 70%;\n	background-repeat : no-repeat;\n	background-position : center center;\n	background-size : contain;\n}\n.lpBlock {\n	position : fixed;\n	dipslay : block;\n	width : 100%;\n	left : 0%;\n	top : 0%;\n	text-align : center;\n	margin : 0;\n	padding : 0;\n}\n.alignLeft {\n	text-align : left;\n}\n.alignRight {\n	text-align : right;\n}\n.nowloading {\n	display : block;\n	position : fixed;\n	top : 0%;\n	left : 0%;\n	width : 100%;\n	height : 100%;\n	background-color: black;\n}\n.nowloading>.progress {\n	position : absolute;\n	bottom : 2%;\n	right : 2%;\n	width :100%;\n	text-align : right;\n}\n.nowloading>.progress>.logo {\n	display : inline-block;\n	width : 16px;\n	height : 16px;\n}";
     (document.querySelector("head")).appendChild(style);
   };
 
@@ -83,6 +85,7 @@
         img.src = url;
       }
     } else {
+      percent.textContent = "100";
       fadeOut(loadView);
       showFirstSection();
     }
@@ -106,7 +109,7 @@
   };
 
   convertParams = function(elem) {
-    var bg, classStr, lst, touch, x, y;
+    var bg, classStr, img, lst, touch, x, y;
     classStr = elem.getAttribute("class");
     if (!classStr) {
       classStr = "";
@@ -115,15 +118,24 @@
     if (bg) {
       elem.style.backgroundImage = "url(" + bg + ")";
     }
-    x = elem.getAttribute("lp-x");
-    if (x) {
-      elem.setAttribute("class", classStr + " lpBlock");
-      elem.style.left = x + "%";
-    }
     y = elem.getAttribute("lp-y");
     if (y) {
       elem.setAttribute("class", classStr + " lpBlock");
       elem.style.top = y + "%";
+    }
+    x = elem.getAttribute("lp-x");
+    if (x) {
+      if (x <= 50) {
+        elem.setAttribute("class", classStr + " lpBlock alignLeft");
+      } else {
+        elem.setAttribute("class", classStr + " lpBlock alignRight");
+      }
+      elem.style.left = x + "%";
+    }
+    img = elem.getAttribute("lp-img");
+    if (img) {
+      elem.style.backgroundImage = "url(" + img + ")";
+      elem.setAttribute("class", classStr + " img");
     }
     if (elem.getAttribute("lp-speed")) {
       elem.setAttribute("lp-text", elem.textContent);
@@ -132,25 +144,34 @@
     if (touch) {
       if (touch === "next") {
         elem.addEventListener("click", gotoNextSection);
+        elem.style.cursor = "pointer";
       } else if (touch === "back") {
         elem.addEventListener("click", goBackToLastSection);
+        elem.style.cursor = "pointer";
       } else {
         lst = touch.split(":");
         if (lst[0] === "goto") {
           elem.addEventListener("click", gotoTargetId);
+          elem.style.cursor = "pointer";
         }
       }
     }
   };
 
   moveFrame = function() {
-    var action, count, currentFrame, elem, maxTime, _i, _len;
+    var action, count, currentFrame, elem, maxTime, _i, _j, _len, _len1;
     frameCount++;
     pageFrameCount++;
     for (_i = 0, _len = speedElems.length; _i < _len; _i++) {
       elem = speedElems[_i];
       count = (pageFrameCount - PAGE_DELAY) * parseInt(elem.getAttribute("lp-speed")) * 0.02;
       elem.textContent = (elem.getAttribute("lp-text")).substring(0, count);
+    }
+    if (pageFrameCount === 1) {
+      for (_j = 0, _len1 = delayElems.length; _j < _len1; _j++) {
+        elem = delayElems[_j];
+        elem.style.visibility = "hidden";
+      }
     }
     if (pageFrameCount <= PAGE_DELAY) {
       isWorking = true;
@@ -169,7 +190,7 @@
       } else {
         if (pageFrameCount < PAGE_DELAY / 2) {
           maxTime = PAGE_DELAY / 2;
-          before.style.transform = "scale(" + (2.0 + Math.cos(Math.PI / (1.0 + (pageFrameCount / maxTime)))) + ")";
+          before.style.transform = "scale(" + (2.0 + Math.cos(Math.PI / (1.0 + ((0.5 * pageFrameCount) / maxTime)))) + ")";
           before.style.opacity = (maxTime - pageFrameCount) / (maxTime * 1.0);
         } else {
           if (before) {
@@ -195,6 +216,20 @@
       d = elems[_i];
       speed = d.getAttribute("lp-speed");
       if (speed) {
+        list.push(d);
+      }
+    }
+    return list;
+  };
+
+  getDelayElement = function(elem) {
+    var d, delay, elems, list, _i, _len;
+    list = [];
+    elems = elem.getElementsByTagName("*");
+    for (_i = 0, _len = elems.length; _i < _len; _i++) {
+      d = elems[_i];
+      delay = d.getAttribute("lp-delay");
+      if (delay !== null && delay !== false) {
         list.push(d);
       }
     }
@@ -238,8 +273,13 @@
   };
 
   gotoNextSection = function() {
-    var afterId;
+    var afterId, elem;
     if (isWorking) {
+      return;
+    }
+    if (delayElems.length) {
+      elem = delayElems.shift();
+      elem.style.visibility = "visible";
       return;
     }
     pageFrameCount = 0;
@@ -250,12 +290,19 @@
     }
     after = sections[pageCount];
     speedElems = getSpeedElement(after);
+    delayElems = getDelayElement(after);
     switchVideoState();
     afterId = after.getAttribute("id");
   };
 
   goBackToLastSection = function() {
+    var elem;
     if (isWorking) {
+      return;
+    }
+    if (delayElems.length) {
+      elem = delayElems.shift();
+      elem.style.visibility = "visible";
       return;
     }
     pageFrameCount = 0;
@@ -266,6 +313,7 @@
     }
     after = sections[pageCount];
     speedElems = getSpeedElement(after);
+    delayElems = getDelayElement(after);
     switchVideoState();
   };
 
@@ -289,6 +337,7 @@
     after = document.querySelector("#" + afterId);
     pageFrameCount = 0;
     speedElems = getSpeedElement(after);
+    delayElems = getDelayElement(after);
     switchVideoState();
   };
 
@@ -309,7 +358,21 @@
   };
 
   init = function() {
+    var ajastFontSize, html;
     setDefaultCSS();
+    html = document.querySelector("html");
+    ajastFontSize = function() {
+      var heightSize, widthSize;
+      widthSize = parseInt(window.innerWidth * 0.3);
+      heightSize = parseInt(window.innerHeight * 0.4);
+      if (heightSize < widthSize) {
+        return html.style.fontSize = heightSize + "%";
+      } else {
+        return html.style.fontSize = widthSize + "%";
+      }
+    };
+    window.addEventListener("resize", ajastFontSize);
+    ajastFontSize();
   };
 
   delayInit = function() {

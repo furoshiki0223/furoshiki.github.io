@@ -1,0 +1,38 @@
+/* url("font/TanukiMagic.woff") format("woff"), */
+@font-face {
+  font-family: 'normal';
+  src:  url("../font/KFhimaji.otf") format("opentype");
+}
+html {
+	font-family: 'normal', meiryo, sans-serif;
+}
+a {
+	color : rgb(200,200,255);
+	text-decoration : none;
+}
+a:hover {
+	text-decoration : underline;
+}
+ul {
+	width : 70%;
+	text-align :left;
+	margin : 0 auto;
+	li {
+		margin-bottom : 20px;
+	}
+}
+p {
+	padding : 0% 10%;
+	line-height:150%;
+}
+h1,h2 {
+	font-weight : normal;
+}
+.white{
+	background-color : white;
+	color : black;
+}
+.describe {
+	text-align :left;
+	font-size: 80%;
+}

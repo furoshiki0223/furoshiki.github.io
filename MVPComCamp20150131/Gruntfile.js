@@ -2,14 +2,18 @@ module.exports = function (g) {
 
 	var pkg = g.file.readJSON('package.json');
 
-	g.loadNpmTasks('grunt-contrib-coffee');
-	g.loadNpmTasks('grunt-contrib-compass');
-	g.loadNpmTasks('grunt-contrib-concat');
-	g.loadNpmTasks('grunt-contrib-uglify');
-	g.loadNpmTasks('grunt-contrib-cssmin');
 	g.loadNpmTasks('grunt-contrib-watch');
 	g.loadNpmTasks('grunt-contrib-connect');
 	g.loadNpmTasks('grunt-open');
+
+	g.loadNpmTasks('grunt-contrib-coffee');
+	g.loadNpmTasks('grunt-contrib-compass');
+
+	g.loadNpmTasks('grunt-contrib-concat');
+
+	g.loadNpmTasks('grunt-contrib-uglify');
+	g.loadNpmTasks('grunt-contrib-cssmin');
+	g.loadNpmTasks('grunt-contrib-htmlmin');
 
 	var liveReloadPort = 35729;
     var lrSnippet = require('connect-livereload')({port: liveReloadPort});
@@ -18,6 +22,34 @@ module.exports = function (g) {
     };
 
 	g.initConfig({
+		watch: {
+            options: { livereload: liveReloadPort},
+			files: [
+				'img/*.jpg','img/*.png','img/*.gif',
+				'js/coffee/*.coffee',
+				'css/sass/*.scss',
+				'html/*.html'
+			],
+			tasks: ['coffee','compass','concat','uglify','cssmin','htmlmin']
+		},
+        open: {
+            server: {
+                url: 'http://localhost:<%=connect.options.port%>'
+            }
+        },
+		connect: {
+			options: {
+				port: 9001,
+				hostname : 'localhost'
+			},
+			livereload: {
+				options: {
+					middleware: function (connect) {
+						return [ lrSnippet, mountFolder(connect, './') ];
+					}
+				}
+			}
+		},
 		coffee: {
 			compile: {
 				files: [{
@@ -50,7 +82,7 @@ module.exports = function (g) {
 		uglify: {
 			dist: {
 				files: {
-					'js/leaping-min.js': 'js/concat/common.js'
+					'js/leaping-core.min.js': 'js/concat/common.js'
 				}
 			}
 		},
@@ -61,34 +93,25 @@ module.exports = function (g) {
 				}
 			}
 		},
-		watch: {
-            options: { livereload: liveReloadPort},
-			files: [
-				'*.html',
-				'img/*.jpg','img/*.png','img/*.gif',
-				'js/coffee/*.coffee',
-				'css/sass/*.scss'
-			],
-			tasks: ['coffee','compass','concat','uglify','cssmin']
-		},
-		connect: {
-			options: {
-				port: 9001,
-				hostname : 'localhost'
-			},
-			livereload: {
+		htmlmin: {
+            dist: {
 				options: {
-					middleware: function (connect) {
-						return [ lrSnippet, mountFolder(connect, './') ];
-					}
-				}
+					removeRedundantAttributes: true,
+					removeOptionalTags: true,
+					removeComments: true,
+					removeCommentsFromCDATA: true,
+					removeCDATASectionsFromCDATA: true,
+					collapseWhitespace: true,
+					minifyJS : true,
+					minifyCSS : true,
+					minifyURLs : true,
+				},
+				expand: true,
+				cwd: 'html/',
+				src: '*.html',
+				dest: '', ext: '.html'
 			}
-		},
-        open: {
-            server: {
-                url: 'http://localhost:<%=connect.options.port%>'
-            }
-        }
+		}
 	});
 
 	g.registerTask('default',['connect:livereload','open','watch']);

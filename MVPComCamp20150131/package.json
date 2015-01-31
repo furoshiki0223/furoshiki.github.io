@@ -29,6 +29,8 @@
   "homepage": "https://github.com/qkwkw/qkwkw.github.io",
   "devDependencies": {
     "connect-livereload": "^0.5.2",
+    "grunt-contrib-htmlmin": "^0.3.0",
+    "grunt-html-minify": "^0.3.1",
     "grunt-open": "^0.2.3"
   }
 }
