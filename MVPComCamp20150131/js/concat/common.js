@@ -237,7 +237,7 @@
   };
 
   switchVideoState = function() {
-    var video;
+    var iframe, video;
     if (isMobile) {
       return;
     }
@@ -246,11 +246,19 @@
       if (video) {
         video.pause();
       }
+      iframe = before.querySelector("iframe");
+      if (iframe) {
+        iframe.setAttribute("src", "");
+      }
     }
     if (after) {
       video = after.querySelector("video");
       if (video) {
         video.play();
+      }
+      iframe = after.querySelector("iframe");
+      if (iframe) {
+        iframe.setAttribute("src", iframe.getAttribute("lp-src"));
       }
     }
   };

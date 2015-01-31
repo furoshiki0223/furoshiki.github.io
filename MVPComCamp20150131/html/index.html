@@ -51,7 +51,8 @@
 </head>
 <body>
 
-<!--
+<!--  -->
+
 <section lp-touch="next" lp-bg="img/01.jpg" style="color:black;text-shadow:0px 0px 3px white,0px 0px 5px white,0px 0px 7px white,0px 0px 10px white;">
 	<h1 lp-y="40" style="font-size:210%;">わくわくHTML5??</h1>
 	<p lp-y="60" style="font-size:80%;">2015 MVP Community Camp 北海道エリア</p>
@@ -112,11 +113,11 @@
 	<p lp-y="80" class="blink" style="font-size:80%;">ただいま、わくわく減少中↓↓</p>
 </section>
 
-<section lp-touch="next" lp-action="none">
-	<p lp-y="45">そもそもHTML5とは何だったのか？</p>
+<section lp-touch="next" lp-action="slide-in" class="white">
+	<h2 lp-y="43" lp-speed="20">What is HTML5？</h2>
 </section>
 
-<section lp-touch="next" lp-action="none">
+<section lp-touch="next">
 	<p>W3C勧告になったHTML5</p>
 	<div lp-img="img/04.jpg" lp-delay></div>
 	<div lp-img="img/04a.jpg" lp-delay></div>
@@ -131,7 +132,7 @@
 <section lp-touch="next" lp-action="none">
 	<p lp-y="45">で、中身は</p>
 </section>
- -->
+
 <section lp-touch="next">
 	<h2>HTML5という仕様</h2>
 	<ul>
@@ -142,7 +143,6 @@
 		<li lp-delay>廃止するタグの扱い</li>
 	</ul>
 </section>
-
 <section lp-touch="next">
 	<h2>かっこいいグラフィクスを扱う機能</h2>
 	<p>
@@ -154,6 +154,10 @@
 		最近は『WebGL』。4月にWindows Phone 8.1、9月にAndroid Browser 37、同月にiOS 8と、2014年にモバイルで一気に動くようになった！<span lp-delay>FirefoxOSは2013年の段階で既に動作。</span>
 	</p>
 	<p lp-delay>→ 今回のHTML5の仕様には含まれない</p>
+</section>
+
+<section lp-touch="next">
+	<iframe lp-src="http://qkwkw.github.io/lab/sample/webgleapingjs/index.html"></iframe>
 </section>
 
 <section lp-touch="next">
@@ -183,40 +187,76 @@
 	<p lp-delay>↓<br/>Webを単なるドキュメントビューワーでなく、アプリケーションプラットフォームにしてやろう！</p>
 </section>
 
+
+
 <section lp-touch="next" lp-action="slide-in" class="white">
 	<h2 lp-y="43" lp-speed="30">Web is an application platform.</h2>
 </section>
 
 <section lp-touch="next">
-	<h2>1. ブラウザの進化の速さが向上</h2>
+	<h2>Webはドキュメントビューワーでは無い！</h2>
+	<ul>
+		<li lp-delay>ブラウザの進化の速さが向上</li>
+		<li lp-delay>JavaScriptのパフォーマンスが向上</li>
+		<li lp-delay>活用されるシーン・環境が増えた</li>
+	</ul>
+</section>
+
+<section lp-touch="next" class="white" lp-action="slide-in">
+	<h2 lp-y="43" lp-speed="20">Mobile application platform?</h2>
 </section>
 
 <section lp-touch="next">
-	<h2>2. JavaScriptのパフォーマンスが向上</h2>
-</section>
-
-<section lp-touch="next">
-	<h2>3. 活用されるシーン・環境が増えた</h2>
-</section>
-
-<section lp-touch="next" class="white" lp-action="slide-in">
-	<h2 lp-y="43">最近、Web標準が頑張っていること</h2>
-</section>
-<section lp-touch="next" class="white" lp-action="slide-in">
-	<p lp-y="43" lp> Mobile Web</p>
-</section>
-
-<section lp-touch="next" class="white" lp-action="slide-in">
-	<p lp-delay>『モバイル』の世界でもアプリケーションプラットフォームとしての地位を手に入れたい！</p>
+	<p lp-speed="20">『モバイル』の世界でもアプリケーションプラットフォームとしての地位を手に入れたい！</p>
 	<p lp-delay>けど最近って、『ネイティブ ＞ Web技術』</p>
 </section>
 
 <section lp-touch="next">
-	<h2>モバイルは基本、jQuery2系を使う</h2>
-	<p>そろそろ、脱jQueryしてもいい頃では？</p>
+	<h2>なにが問題になる？</h2>
+	<ul>
+		<li lp-delay>パフォーマンス</li>
+		<li lp-delay>ネットワークリソース</li>
+		<li lp-delay>入力デバイス</li>
+	</ul>
 </section>
 
-<section lp-touch="next" class="white">
+
+<section lp-touch="next">
+	<h2 lp-y="45">『IE特化』ではなく『WebKit特化』が問題視</h2>
+</section>
+
+<section lp-touch="next" lp-bg="img/01.jpg" style="color:black;text-shadow:0px 0px 3px white,0px 0px 5px white,0px 0px 7px white,0px 0px 10px white;">
+	<h1 lp-y="40" style="font-size:210%;">わくわく<span lp-delay>WebKit!!!</span></h1>
+	<div lp-img="img/03.png" style="background-size:cover;width:130%;height:100%;top:0%;"></div>
+	<p lp-y="60" style="font-size:80%;">2015 MVP Community Camp 北海道エリア</p>
+	<p lp-y="69" style="font-size:80%;">2015年1月31日</p>
+	<p lp-y="80" class="blink" style="font-size:80%;">ただいま、わくわく減少中↓↓</p>
+</section>
+
+<section lp-touch="next">
+	<h2>どういうこと！？</h2>
+	<ul>
+		<li lp-delay>古いFlexBoxを使うサイトがいっぱい</li>
+		<li lp-delay>「-webkit-」で始まるCSSのベンダプレフィクスばかり</li>
+		<li lp-delay>ユーザーエージェントでフィルタリング</li>
+	</ul>
+</section>
+
+<section lp-touch="next" class="white" lp-action="slide-in">
+	<h2 lp-y="43" lp-speed="20">最後に</h2>
+</section>
+
+<section lp-touch="next">
+	<h2>2015年はWebがもっと変化する</h2>
+	<ul>
+		<li lp-delay>『Webアプリ』はネイティブに変わる</li>
+		<li lp-delay>『Webサイト』『Webコンテンツ』は今後も残る</li>
+		<li lp-delay>昔：Googleの一部という感じが強く、SEOが重要だった</li>
+		<li lp-delay>今：FacebookやGunosyやSumartNewsといった、モバイルアプリの一部のように扱われるようになった</li>
+	</ul>
+</section>
+
+<section class="white">
 	<h1 lp-y="45">ご清聴ありがとうございました</h1>
 </section>
 
