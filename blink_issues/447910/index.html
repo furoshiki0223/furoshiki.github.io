@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='UTF-8' />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>Blink Bugs</title>
+<style>
+.view {
+	width : 400px;
+}
+</style>
+</head>
+<body>
+<article>
+<h1>Blink paint processing bug.</h1>
+<p>The paint processing in Blink can't work enough, when creating scroll action like Parallax and setting CSS parameter "fixed" to background-attachment.</p>
+<p> Issue -> <a href="https://code.google.com/p/chromium/issues/detail?id=447910">https://code.google.com/p/chromium/issues/detail?id=447910</a></p>
+<p>(Left: Chrome 41.0.2272.2 canary (64-bit) / Right: Firefox 34.0.5)</p>
+<video loop autoplay class="view">
+	<source src='video/1.webm'>
+	<source src='video/1.ogv'>
+</video>
+<p><a href="1.html">Sample Code</a></p>
+<p>The service called 'Pixiv' has been effected by this issue. Close button is moving, when scrolling view. (Chrome 42.0.2292.0 canary (64-bit))</p>
+<video controls class="view">
+	<source src='video/2.webm'>
+	<source src='video/2.ogv'>
+	<source src='video/2.mp4'>
+</video>
+
+<p><a href="http://www.pixiv.net/member_illust.php?mode=medium&illust_id=48514392">Pixiv</a></p>
+
+</article>
+</body>
+</html>
