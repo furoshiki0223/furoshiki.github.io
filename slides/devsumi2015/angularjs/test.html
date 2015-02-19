@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja"
+    tpc-jsonp-url="http://hiroshik.info/topico/topico_server.php?html5j"
+    tpc-jsonp-methodname="loadTweets"
+    tpc-hashtag="html5j"
+    tpc-polling-span="10000"
+    tpc-animate-duration="60"
+    tpc-position="left"
+    >
+<head>
+  <title>サンプル</title>
+  <script src="js/topico.js"></script>
+  <style>
+  html,body {
+	margin:0;
+	padding:0;
+	color:black;
+	text-shadow:0px 0px 2px white;
+  }
+  body {
+  	font-size : 130%;
+    background-image: url(img/bg.jpg);
+    background-size : cover;
+    background-position : center center;
+    background-attachment : fixed;
+  }
+  h1 {
+  	text-align :right;
+  	margin : 0;
+  	padding : 0;
+  }
+  main {
+  	position:fixed;
+  	right: 0%;
+  	padding : 2%;
+  	text-align : right;
+  }
+  .topico {
+    background-color : rgba(255,255,255,0.5);
+  }
+  </style>
+</head>
+<body>
+	<main>
+		<p>←<span style="font-size:140%;">#html5j</span> Ask us question!!</p>
+		<h1>HTML5 Talk</h1>
+	</main>
+</body>
+</html>
