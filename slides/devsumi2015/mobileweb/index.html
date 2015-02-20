@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja"
+    tpc-jsonp-url="http://hiroshik.info/topico/topico_server.php?devsumiD"
+    tpc-jsonp-methodname="loadTweets"
+    tpc-hashtag="devsumiD"
+    tpc-polling-span="10000"
+    tpc-animate-duration="60"
+    tpc-position="left"
+    >
+<head>
+  <title>Webエンジニア</title>
+  <script src="js/topico.js"></script>
+  <style>
+  html,body {
+	margin:0;
+	padding:0;
+	color:white;
+	text-shadow:0px 0px 2px white;
+  background-color : black;
+  }
+  html {
+  	font-size : 130%;
+  	background-image : url(img/bg.jpg);
+  	background-position : top center;
+  	background-size : cover;
+  	background-attachment : fixed;
+  	width : 100%;
+  	height: 100%;
+
+  }
+  h1 {
+  	text-align :right;
+  	margin : 0;
+  	padding : 0;
+  }
+  main {
+  	position : fixed;
+  	right: 0%;
+  	padding : 2%;
+  	text-align : right;
+  }
+  </style>
+</head>
+<body>
+	<div class="topico"></div>
+	<main>
+		<p>←<span style="font-size:140%;">「#devsumiD」</span>で質問をお待ちしております！！！</p>
+		<h1>Webとモバイル</h1>
+		<p>講演者の自己紹介</p>
+    <p>ネイティブの時代になって現場で変わったこと</p>
+    <p>Webはどう変わっていくのか？Webにしかできないことは？</p>
+    <p>ネイティブの限界・業界の向かう先</p>
+	</main>
+</body>
+</html>
