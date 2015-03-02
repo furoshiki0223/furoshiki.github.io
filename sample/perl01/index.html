@@ -10,7 +10,7 @@
 window.addEventListener("load",function(){
   setTimeout(function(){
     var timing = performance.timing;
-    alert((timing.loadEventEnd-timing.navigationStart)+"ナノ秒");
+    alert((timing.loadEventEnd-timing.navigationStart)+"マイクロ秒");
   },0);
 });
 document.querySelector(".delayStart").addEventListener("click",function(){
