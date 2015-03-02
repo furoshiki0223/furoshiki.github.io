@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<title>Navigation Timing API can not catch this performance matter.</title>
+<h1>Navigation Timing API has a problem.</h1>
+
+<p>Navigation Timing API can not catch this performance matter. Nav Timing 2 also can not resolve it. This hyper link makes you waiting so match time, but API says it's very short time.</p>
+<p><a href="./index.html" class="delayStart">[ click here! I have a problem. ]</a></p>
+<p class="result"></p>
+
+<script>
+window.addEventListener("load",function(){
+  setTimeout(function(){
+    var timing = performance.timing;
+    var text =
+      "performance.timing.loadEventEnd - performance.timing.navigationStart ->" +
+      (timing.loadEventEnd-timing.navigationStart)+"\n";
+    document.querySelector(".result").textContent = text;
+
+  },0);
+});
+document.querySelector(".delayStart").addEventListener("click",function(){
+  for(var i=0 ; i<5000000000 ; i++ ) {} // Hevy !!
+});
+</script>
